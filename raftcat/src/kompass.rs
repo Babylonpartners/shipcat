@@ -45,7 +45,7 @@ pub async fn register(mut kompass_hub_url: Url, raftcat_url: Url) -> Result<()> 
 
     let region = env::var("REGION_NAME").expect("Need REGION_NAME evar");
     let ns = env::var("NAMESPACE").expect("Need NAMESPACE evar");
-    let id = format!("raftcat-{}-{}", region, ns);
+    let id = format!("-raftcat-{}-{}", region, ns);
     let payload = RegisterRequest {
         cluster: region,
         namespace: ns,
