@@ -8,7 +8,8 @@ use semver::Version;
 use url::Url;
 use uuid::Uuid;
 
-#[allow(unused_imports)] use super::{BaseManifest, ConfigState, Result, Vault};
+#[allow(unused_imports)]
+use super::{BaseManifest, ConfigState, Result, Vault};
 
 use super::structs::Authorization;
 
