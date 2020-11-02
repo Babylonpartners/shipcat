@@ -123,51 +123,10 @@ impl ManifestDefaults {
     }
 
     fn from_region(reg: &Region) -> Result<Self> {
-        // TODO: Remove Region#defaults and Region#env
-        Ok(
-            match (reg.defaultsV2.clone(), reg.defaults.clone(), reg.env.clone()) {
-                (Some(defaults), None, None) => match serde_yaml::from_value(defaults) {
-                    Err(e) => bail!("Region {} defaults did not parse as YAML: {}", reg.name, e),
-                    Ok(d) => d,
-                },
-                (None, Some(defaults), env) => {
-                    let mut defs = Self::default();
-                    if let Some(authz) = defaults.kong.authorization {
-                        defs.kong_apis.defaults.authorization = Enabled {
-                            enabled: None,
-                            item: AuthorizationSource {
-                                allow_anonymous: Some(authz.allow_anonymous),
-                                allowed_audiences: Some(authz.allowed_audiences),
-                                allow_cookies: Some(authz.allow_cookies),
-                                allow_invalid_tokens: Some(authz.allow_invalid_tokens),
-                                required_scopes: Some(authz.required_scopes),
-                                enable_cookie_refresh: Some(authz.enable_cookie_refresh),
-                                refresh_auth_service: authz.refresh_auth_service,
-                                refresh_body_refresh_token_key: authz.refresh_body_refresh_token_key,
-                                refresh_cookie_domain: authz.refresh_cookie_domain,
-                                refresh_max_age_sec: authz.refresh_max_age_sec,
-                                refresh_http_timeout_msec: authz.refresh_http_timeout_msec,
-                                refresh_renew_before_expiry_sec: authz.refresh_renew_before_expiry_sec,
-                            },
-                        };
-                    }
-                    defs.kong.item.authorization.enabled = Some(defaults.kong.authorizationEnabled);
-                    if let Some(env) = env {
-                        defs.env = env.into();
-                    }
-                    defs
-                }
-                (Some(_), Some(_), _) => bail!("Region#defaultsV2 and Region#default are mutually exclusive"),
-                (Some(_), _, Some(_)) => bail!("Region#defaultsV2 and Region#env are mutually exclusive"),
-                (None, None, env) => {
-                    let mut defs = Self::default();
-                    if let Some(env) = env {
-                        defs.env = env.into();
-                    }
-                    defs
-                }
-            },
-        )
+        match serde_yaml::from_value(defaults) {
+            Err(e) => bail!("Region {} defaults did not parse as YAML: {}", reg.name, e),
+            Ok(d) => Ok(d),
+        }
     }
 }
 

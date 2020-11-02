@@ -516,19 +516,11 @@ pub struct Region {
     /// CRD tuning
     pub customResources: Option<CRSettings>,
 
-    /// Old default values for services
-    // TODO: Remove after everything has been migrated to `defaultsV2`
-    #[serde(skip_serializing, default)]
-    pub defaults: Option<DefaultConfig>,
-    /// Old default environment variables to inject
-    // TODO: Remove after everything has been migrated to `defaultsV2`
-    #[serde(default, skip_serializing)]
-    pub env: Option<BTreeMap<String, String>>,
     /// Default values for services (used by shipcat_filebacked only)
-    // TODO: Rename to `defaults` after removing legacy field
-    #[serde(skip_serializing, default)]
+    // TODO: Remove `defaultsV2` alias
+    #[serde(skip_serializing, default, alias = "defaultsV2")]
     #[cfg(feature = "filesystem")]
-    pub defaultsV2: Option<serde_yaml::Value>,
+    pub defaults: serde_yaml::Value,
 
     /// The regular expression used to verify destination rules' regions
     #[serde(default, skip_serializing_if = "Option::is_none", with = "serde_regex")]
