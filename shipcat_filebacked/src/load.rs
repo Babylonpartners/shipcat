@@ -5,7 +5,7 @@ use serde::de::DeserializeOwned;
 use shipcat_definitions::{Config, ErrorKind, Manifest, Region, Result, ResultExt};
 use walkdir::WalkDir;
 
-use super::{authorization::AuthorizationSource, util::Enabled, BaseManifest, SimpleManifest};
+use super::{BaseManifest, SimpleManifest};
 use crate::manifest::{ManifestDefaults, ManifestOverrides, ManifestSource};
 
 impl ManifestSource {
@@ -123,7 +123,7 @@ impl ManifestDefaults {
     }
 
     fn from_region(reg: &Region) -> Result<Self> {
-        match serde_yaml::from_value(defaults) {
+        match serde_yaml::from_value(reg.defaults.clone()) {
             Err(e) => bail!("Region {} defaults did not parse as YAML: {}", reg.name, e),
             Ok(d) => Ok(d),
         }
