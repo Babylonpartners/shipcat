@@ -47,7 +47,7 @@ workflows:
 jobs:
   musl_build:
     docker:
-      - image: clux/muslrust:stable
+      - image: clux/muslrust:1.49.0-stable
     working_directory: /volume
     resource_class: xlarge
     steps:
@@ -73,7 +73,7 @@ jobs:
 
   cargo_test:
     docker:
-      - image: circleci/rust:1.45
+      - image: circleci/rust:1.49.0
       - image: vault:0.6.1
         environment:
           SKIP_SETCAP: true
@@ -140,7 +140,7 @@ jobs:
     working_directory: /Users/distiller/project
     steps:
       - checkout
-      - run: curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain stable
+      - run: curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain 1.49.0
       - restore_cache:
           keys:
             - mac_cache_{{ checksum "Cargo.lock" }}
