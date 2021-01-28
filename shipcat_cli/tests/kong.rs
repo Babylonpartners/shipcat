@@ -116,6 +116,9 @@ async fn kong_test() {
     );
     assert_eq!(attr.enabled, true);
 
+    assert_plugin_removed!("RateLimiting", api.plugins.remove(0), ApiPlugin::RateLimiting);
+    assert_plugin_removed!("UserRateLimit", api.plugins.remove(0), ApiPlugin::UserRateLimit);
+
     assert_upstream_header_transform(api.plugins.remove(0), "fake-ask");
 
     assert!(api.plugins.is_empty());
@@ -169,7 +172,8 @@ async fn kong_test() {
         api.plugins.remove(0),
         ApiPlugin::JsonCookiesCsrf
     );
-
+    assert_plugin_removed!("RateLimiting", api.plugins.remove(0), ApiPlugin::RateLimiting);
+    assert_plugin_removed!("UserRateLimit", api.plugins.remove(0), ApiPlugin::UserRateLimit);
     assert_upstream_header_transform(api.plugins.remove(0), "fake-storage");
 
     assert!(api.plugins.is_empty());

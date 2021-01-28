@@ -23,19 +23,20 @@ RUN set -x && \
     apk del unzip && rm vault.zip
 
 # Create non-root user (alpine)
-RUN adduser kubectl -Du 1000 -h /config && \
-    \
-    # Basic check it works.
-    kubectl version --client && \
-    helm version -c && helm init -c && \
-    kubeval --version
+RUN adduser kubectl -Du 1000 -h /config
+
+# Smoke checks
+RUN kubectl version --client
+RUN helm version -c
+# Note: the old version of Helm uses the old Helm stable charts repo by default.
+RUN helm init -c --stable-repo-url https://charts.helm.sh/stable
+RUN kubeval --version
 
 
 # Add core dependencies of validation
+ADD requirements.txt ./
 RUN apk add --no-cache --virtual virtualbuild libffi-dev g++ python3-dev openssl-dev && \
-    pip3 install --upgrade pip && \
-    pip3 install yamllint yq && \
-    pip3 install semver jira jinja2 schema && \
+    pip3 install -r requirements.txt && \
     apk del virtualbuild
 
 # Install shipcat (built for musl outside)

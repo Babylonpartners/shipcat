@@ -26,9 +26,8 @@ RUN set -x && \
 # Currently the version pinning mechanism in helm plugin does not work for tags with + in them
 # See https://github.com/databus23/helm-diff/issues/50
 # Also cannot sanity check installation because it tries to talk to the cluster
-RUN set -x && \
-    helm init -c && \
-    curl -sSL https://github.com/databus23/helm-diff/releases/download/v${HELMDIFFVER}/helm-diff-linux.tgz | tar xvz -C $(helm home)/plugins
+RUN helm init -c --stable-repo-url https://charts.helm.sh/stable
+RUN set -x && curl -sSL https://github.com/databus23/helm-diff/releases/download/v${HELMDIFFVER}/helm-diff-linux.tgz | tar xvz -C $(helm home)/plugins
 
 # Install python dependencies
 RUN pip install --upgrade pip && \

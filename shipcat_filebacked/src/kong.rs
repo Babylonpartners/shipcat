@@ -2,7 +2,7 @@ use merge::Merge;
 use std::collections::BTreeMap;
 
 use shipcat_definitions::{
-    structs::{Authentication, Authorization, BabylonAuthHeader, Cors, Kong},
+    structs::{Authentication, Authorization, BabylonAuthHeader, Cors, Kong, KongRateLimit},
     KongConfig, Region, Result,
 };
 
@@ -118,6 +118,9 @@ pub struct KongSource {
 
     pub w3c_trace_context: Option<bool>,
     pub babylon_request_id: Option<bool>,
+
+    pub ip_rate_limits: Enabled<KongRateLimitSource>,
+    pub user_rate_limits: Enabled<KongRateLimitSource>,
 }
 
 struct KongBuildParams {
@@ -175,6 +178,9 @@ impl Build<Kong, KongBuildParams> for KongSource {
             // Distributed Tracing
             babylon_request_id: self.babylon_request_id.unwrap_or(true), // enabled by default for backwards compatibility.
             w3c_trace_context: self.w3c_trace_context.unwrap_or_default(),
+
+            ip_rate_limits: self.ip_rate_limits.build(&())?,
+            user_rate_limits: self.user_rate_limits.build(&())?,
         })
     }
 }
@@ -214,5 +220,25 @@ impl KongSource {
                 }
             })
             .collect())
+    }
+}
+
+#[derive(Deserialize, Default, Merge, Clone)]
+#[serde(default, deny_unknown_fields)]
+pub struct KongRateLimitSource {
+    pub per_second: Option<u32>,
+    pub per_minute: Option<u32>,
+    pub per_hour: Option<u32>,
+    pub per_day: Option<u32>,
+}
+
+impl Build<KongRateLimit, ()> for KongRateLimitSource {
+    fn build(self, _params: &()) -> Result<KongRateLimit> {
+        Ok(KongRateLimit {
+            per_second: self.per_second,
+            per_minute: self.per_minute,
+            per_hour: self.per_hour,
+            per_day: self.per_day,
+        })
     }
 }

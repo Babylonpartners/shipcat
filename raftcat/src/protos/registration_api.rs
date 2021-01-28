@@ -23,7 +23,7 @@
 /// of protobuf runtime.
 // const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_2_16_2;
 
-#[derive(PartialEq,Clone,Default)]
+#[derive(PartialEq, Clone, Default)]
 #[cfg_attr(feature = "with-serde", derive(Serialize, Deserialize))]
 pub struct RegisterRequest {
     // message fields
@@ -55,6 +55,7 @@ impl RegisterRequest {
     pub fn get_cluster(&self) -> &str {
         &self.cluster
     }
+
     pub fn clear_cluster(&mut self) {
         self.cluster.clear();
     }
@@ -81,6 +82,7 @@ impl RegisterRequest {
     pub fn get_namespace(&self) -> &str {
         &self.namespace
     }
+
     pub fn clear_namespace(&mut self) {
         self.namespace.clear();
     }
@@ -107,6 +109,7 @@ impl RegisterRequest {
     pub fn get_id(&self) -> &str {
         &self.id
     }
+
     pub fn clear_id(&mut self) {
         self.id.clear();
     }
@@ -133,6 +136,7 @@ impl RegisterRequest {
     pub fn get_endpoint(&self) -> &str {
         &self.endpoint
     }
+
     pub fn clear_endpoint(&mut self) {
         self.endpoint.clear();
     }
@@ -165,19 +169,24 @@ impl ::protobuf::Message for RegisterRequest {
             match field_number {
                 1 => {
                     ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.cluster)?;
-                },
+                }
                 2 => {
                     ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.namespace)?;
-                },
+                }
                 3 => {
                     ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.id)?;
-                },
+                }
                 4 => {
                     ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.endpoint)?;
-                },
+                }
                 _ => {
-                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
-                },
+                    ::protobuf::rt::read_unknown_or_skip_group(
+                        field_number,
+                        wire_type,
+                        is,
+                        self.mut_unknown_fields(),
+                    )?;
+                }
             };
         }
         ::std::result::Result::Ok(())
@@ -204,7 +213,10 @@ impl ::protobuf::Message for RegisterRequest {
         my_size
     }
 
-    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::ProtobufResult<()> {
+    fn write_to_with_cached_sizes(
+        &self,
+        os: &mut ::protobuf::CodedOutputStream<'_>,
+    ) -> ::protobuf::ProtobufResult<()> {
         if !self.cluster.is_empty() {
             os.write_string(1, &self.cluster)?;
         }
@@ -236,9 +248,11 @@ impl ::protobuf::Message for RegisterRequest {
     fn as_any(&self) -> &dyn (::std::any::Any) {
         self as &dyn (::std::any::Any)
     }
+
     fn as_any_mut(&mut self) -> &mut dyn (::std::any::Any) {
         self as &mut dyn (::std::any::Any)
     }
+
     fn into_any(self: ::std::boxed::Box<Self>) -> ::std::boxed::Box<dyn (::std::any::Any)> {
         self
     }
@@ -252,33 +266,46 @@ impl ::protobuf::Message for RegisterRequest {
     }
 
     fn descriptor_static() -> &'static ::protobuf::reflect::MessageDescriptor {
-        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::LazyV2::INIT;
+        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> =
+            ::protobuf::rt::LazyV2::INIT;
         descriptor.get(|| {
             let mut fields = ::std::vec::Vec::new();
-            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeString,
+            >(
                 "cluster",
-                |m: &RegisterRequest| { &m.cluster },
-                |m: &mut RegisterRequest| { &mut m.cluster },
+                |m: &RegisterRequest| &m.cluster,
+                |m: &mut RegisterRequest| &mut m.cluster,
             ));
-            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeString,
+            >(
                 "namespace",
-                |m: &RegisterRequest| { &m.namespace },
-                |m: &mut RegisterRequest| { &mut m.namespace },
+                |m: &RegisterRequest| &m.namespace,
+                |m: &mut RegisterRequest| &mut m.namespace,
             ));
-            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeString,
+            >(
                 "id",
-                |m: &RegisterRequest| { &m.id },
-                |m: &mut RegisterRequest| { &mut m.id },
+                |m: &RegisterRequest| &m.id,
+                |m: &mut RegisterRequest| &mut m.id,
             ));
-            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeString,
+            >(
                 "endpoint",
-                |m: &RegisterRequest| { &m.endpoint },
-                |m: &mut RegisterRequest| { &mut m.endpoint },
+                |m: &RegisterRequest| &m.endpoint,
+                |m: &mut RegisterRequest| &mut m.endpoint,
             ));
             ::protobuf::reflect::MessageDescriptor::new_pb_name::<RegisterRequest>(
                 "RegisterRequest",
                 fields,
-                file_descriptor_proto()
+                file_descriptor_proto(),
             )
         })
     }
@@ -311,7 +338,7 @@ impl ::protobuf::reflect::ProtobufValue for RegisterRequest {
     }
 }
 
-#[derive(PartialEq,Clone,Default)]
+#[derive(PartialEq, Clone, Default)]
 #[cfg_attr(feature = "with-serde", derive(Serialize, Deserialize))]
 pub struct RegisterResponse {
     // special fields
@@ -343,8 +370,13 @@ impl ::protobuf::Message for RegisterResponse {
             let (field_number, wire_type) = is.read_tag_unpack()?;
             match field_number {
                 _ => {
-                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
-                },
+                    ::protobuf::rt::read_unknown_or_skip_group(
+                        field_number,
+                        wire_type,
+                        is,
+                        self.mut_unknown_fields(),
+                    )?;
+                }
             };
         }
         ::std::result::Result::Ok(())
@@ -359,7 +391,10 @@ impl ::protobuf::Message for RegisterResponse {
         my_size
     }
 
-    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::ProtobufResult<()> {
+    fn write_to_with_cached_sizes(
+        &self,
+        os: &mut ::protobuf::CodedOutputStream<'_>,
+    ) -> ::protobuf::ProtobufResult<()> {
         os.write_unknown_fields(self.get_unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -379,9 +414,11 @@ impl ::protobuf::Message for RegisterResponse {
     fn as_any(&self) -> &dyn (::std::any::Any) {
         self as &dyn (::std::any::Any)
     }
+
     fn as_any_mut(&mut self) -> &mut dyn (::std::any::Any) {
         self as &mut dyn (::std::any::Any)
     }
+
     fn into_any(self: ::std::boxed::Box<Self>) -> ::std::boxed::Box<dyn (::std::any::Any)> {
         self
     }
@@ -395,13 +432,14 @@ impl ::protobuf::Message for RegisterResponse {
     }
 
     fn descriptor_static() -> &'static ::protobuf::reflect::MessageDescriptor {
-        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::LazyV2::INIT;
+        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> =
+            ::protobuf::rt::LazyV2::INIT;
         descriptor.get(|| {
             let fields = ::std::vec::Vec::new();
             ::protobuf::reflect::MessageDescriptor::new_pb_name::<RegisterResponse>(
                 "RegisterResponse",
                 fields,
-                file_descriptor_proto()
+                file_descriptor_proto(),
             )
         })
     }
@@ -430,7 +468,7 @@ impl ::protobuf::reflect::ProtobufValue for RegisterResponse {
     }
 }
 
-#[derive(PartialEq,Clone,Default)]
+#[derive(PartialEq, Clone, Default)]
 #[cfg_attr(feature = "with-serde", derive(Serialize, Deserialize))]
 pub struct DeregisterRequest {
     // message fields
@@ -461,6 +499,7 @@ impl DeregisterRequest {
     pub fn get_cluster(&self) -> &str {
         &self.cluster
     }
+
     pub fn clear_cluster(&mut self) {
         self.cluster.clear();
     }
@@ -487,6 +526,7 @@ impl DeregisterRequest {
     pub fn get_namespace(&self) -> &str {
         &self.namespace
     }
+
     pub fn clear_namespace(&mut self) {
         self.namespace.clear();
     }
@@ -513,6 +553,7 @@ impl DeregisterRequest {
     pub fn get_id(&self) -> &str {
         &self.id
     }
+
     pub fn clear_id(&mut self) {
         self.id.clear();
     }
@@ -545,16 +586,21 @@ impl ::protobuf::Message for DeregisterRequest {
             match field_number {
                 1 => {
                     ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.cluster)?;
-                },
+                }
                 2 => {
                     ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.namespace)?;
-                },
+                }
                 3 => {
                     ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.id)?;
-                },
+                }
                 _ => {
-                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
-                },
+                    ::protobuf::rt::read_unknown_or_skip_group(
+                        field_number,
+                        wire_type,
+                        is,
+                        self.mut_unknown_fields(),
+                    )?;
+                }
             };
         }
         ::std::result::Result::Ok(())
@@ -578,7 +624,10 @@ impl ::protobuf::Message for DeregisterRequest {
         my_size
     }
 
-    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::ProtobufResult<()> {
+    fn write_to_with_cached_sizes(
+        &self,
+        os: &mut ::protobuf::CodedOutputStream<'_>,
+    ) -> ::protobuf::ProtobufResult<()> {
         if !self.cluster.is_empty() {
             os.write_string(1, &self.cluster)?;
         }
@@ -607,9 +656,11 @@ impl ::protobuf::Message for DeregisterRequest {
     fn as_any(&self) -> &dyn (::std::any::Any) {
         self as &dyn (::std::any::Any)
     }
+
     fn as_any_mut(&mut self) -> &mut dyn (::std::any::Any) {
         self as &mut dyn (::std::any::Any)
     }
+
     fn into_any(self: ::std::boxed::Box<Self>) -> ::std::boxed::Box<dyn (::std::any::Any)> {
         self
     }
@@ -623,28 +674,38 @@ impl ::protobuf::Message for DeregisterRequest {
     }
 
     fn descriptor_static() -> &'static ::protobuf::reflect::MessageDescriptor {
-        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::LazyV2::INIT;
+        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> =
+            ::protobuf::rt::LazyV2::INIT;
         descriptor.get(|| {
             let mut fields = ::std::vec::Vec::new();
-            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeString,
+            >(
                 "cluster",
-                |m: &DeregisterRequest| { &m.cluster },
-                |m: &mut DeregisterRequest| { &mut m.cluster },
+                |m: &DeregisterRequest| &m.cluster,
+                |m: &mut DeregisterRequest| &mut m.cluster,
             ));
-            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeString,
+            >(
                 "namespace",
-                |m: &DeregisterRequest| { &m.namespace },
-                |m: &mut DeregisterRequest| { &mut m.namespace },
+                |m: &DeregisterRequest| &m.namespace,
+                |m: &mut DeregisterRequest| &mut m.namespace,
             ));
-            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeString,
+            >(
                 "id",
-                |m: &DeregisterRequest| { &m.id },
-                |m: &mut DeregisterRequest| { &mut m.id },
+                |m: &DeregisterRequest| &m.id,
+                |m: &mut DeregisterRequest| &mut m.id,
             ));
             ::protobuf::reflect::MessageDescriptor::new_pb_name::<DeregisterRequest>(
                 "DeregisterRequest",
                 fields,
-                file_descriptor_proto()
+                file_descriptor_proto(),
             )
         })
     }
@@ -676,7 +737,7 @@ impl ::protobuf::reflect::ProtobufValue for DeregisterRequest {
     }
 }
 
-#[derive(PartialEq,Clone,Default)]
+#[derive(PartialEq, Clone, Default)]
 #[cfg_attr(feature = "with-serde", derive(Serialize, Deserialize))]
 pub struct DeregisterResponse {
     // special fields
@@ -708,8 +769,13 @@ impl ::protobuf::Message for DeregisterResponse {
             let (field_number, wire_type) = is.read_tag_unpack()?;
             match field_number {
                 _ => {
-                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
-                },
+                    ::protobuf::rt::read_unknown_or_skip_group(
+                        field_number,
+                        wire_type,
+                        is,
+                        self.mut_unknown_fields(),
+                    )?;
+                }
             };
         }
         ::std::result::Result::Ok(())
@@ -724,7 +790,10 @@ impl ::protobuf::Message for DeregisterResponse {
         my_size
     }
 
-    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::ProtobufResult<()> {
+    fn write_to_with_cached_sizes(
+        &self,
+        os: &mut ::protobuf::CodedOutputStream<'_>,
+    ) -> ::protobuf::ProtobufResult<()> {
         os.write_unknown_fields(self.get_unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -744,9 +813,11 @@ impl ::protobuf::Message for DeregisterResponse {
     fn as_any(&self) -> &dyn (::std::any::Any) {
         self as &dyn (::std::any::Any)
     }
+
     fn as_any_mut(&mut self) -> &mut dyn (::std::any::Any) {
         self as &mut dyn (::std::any::Any)
     }
+
     fn into_any(self: ::std::boxed::Box<Self>) -> ::std::boxed::Box<dyn (::std::any::Any)> {
         self
     }
@@ -760,13 +831,14 @@ impl ::protobuf::Message for DeregisterResponse {
     }
 
     fn descriptor_static() -> &'static ::protobuf::reflect::MessageDescriptor {
-        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::LazyV2::INIT;
+        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> =
+            ::protobuf::rt::LazyV2::INIT;
         descriptor.get(|| {
             let fields = ::std::vec::Vec::new();
             ::protobuf::reflect::MessageDescriptor::new_pb_name::<DeregisterResponse>(
                 "DeregisterResponse",
                 fields,
-                file_descriptor_proto()
+                file_descriptor_proto(),
             )
         })
     }
@@ -795,7 +867,7 @@ impl ::protobuf::reflect::ProtobufValue for DeregisterResponse {
     }
 }
 
-#[derive(PartialEq,Clone,Default)]
+#[derive(PartialEq, Clone, Default)]
 #[cfg_attr(feature = "with-serde", derive(Serialize, Deserialize))]
 pub struct HeartbeatRequest {
     // message fields
@@ -827,6 +899,7 @@ impl HeartbeatRequest {
     pub fn get_cluster(&self) -> &str {
         &self.cluster
     }
+
     pub fn clear_cluster(&mut self) {
         self.cluster.clear();
     }
@@ -853,6 +926,7 @@ impl HeartbeatRequest {
     pub fn get_namespace(&self) -> &str {
         &self.namespace
     }
+
     pub fn clear_namespace(&mut self) {
         self.namespace.clear();
     }
@@ -879,6 +953,7 @@ impl HeartbeatRequest {
     pub fn get_id(&self) -> &str {
         &self.id
     }
+
     pub fn clear_id(&mut self) {
         self.id.clear();
     }
@@ -905,6 +980,7 @@ impl HeartbeatRequest {
     pub fn get_endpoint(&self) -> &str {
         &self.endpoint
     }
+
     pub fn clear_endpoint(&mut self) {
         self.endpoint.clear();
     }
@@ -937,19 +1013,24 @@ impl ::protobuf::Message for HeartbeatRequest {
             match field_number {
                 1 => {
                     ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.cluster)?;
-                },
+                }
                 2 => {
                     ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.namespace)?;
-                },
+                }
                 3 => {
                     ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.id)?;
-                },
+                }
                 4 => {
                     ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.endpoint)?;
-                },
+                }
                 _ => {
-                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
-                },
+                    ::protobuf::rt::read_unknown_or_skip_group(
+                        field_number,
+                        wire_type,
+                        is,
+                        self.mut_unknown_fields(),
+                    )?;
+                }
             };
         }
         ::std::result::Result::Ok(())
@@ -976,7 +1057,10 @@ impl ::protobuf::Message for HeartbeatRequest {
         my_size
     }
 
-    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::ProtobufResult<()> {
+    fn write_to_with_cached_sizes(
+        &self,
+        os: &mut ::protobuf::CodedOutputStream<'_>,
+    ) -> ::protobuf::ProtobufResult<()> {
         if !self.cluster.is_empty() {
             os.write_string(1, &self.cluster)?;
         }
@@ -1008,9 +1092,11 @@ impl ::protobuf::Message for HeartbeatRequest {
     fn as_any(&self) -> &dyn (::std::any::Any) {
         self as &dyn (::std::any::Any)
     }
+
     fn as_any_mut(&mut self) -> &mut dyn (::std::any::Any) {
         self as &mut dyn (::std::any::Any)
     }
+
     fn into_any(self: ::std::boxed::Box<Self>) -> ::std::boxed::Box<dyn (::std::any::Any)> {
         self
     }
@@ -1024,33 +1110,46 @@ impl ::protobuf::Message for HeartbeatRequest {
     }
 
     fn descriptor_static() -> &'static ::protobuf::reflect::MessageDescriptor {
-        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::LazyV2::INIT;
+        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> =
+            ::protobuf::rt::LazyV2::INIT;
         descriptor.get(|| {
             let mut fields = ::std::vec::Vec::new();
-            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeString,
+            >(
                 "cluster",
-                |m: &HeartbeatRequest| { &m.cluster },
-                |m: &mut HeartbeatRequest| { &mut m.cluster },
+                |m: &HeartbeatRequest| &m.cluster,
+                |m: &mut HeartbeatRequest| &mut m.cluster,
             ));
-            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeString,
+            >(
                 "namespace",
-                |m: &HeartbeatRequest| { &m.namespace },
-                |m: &mut HeartbeatRequest| { &mut m.namespace },
+                |m: &HeartbeatRequest| &m.namespace,
+                |m: &mut HeartbeatRequest| &mut m.namespace,
             ));
-            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeString,
+            >(
                 "id",
-                |m: &HeartbeatRequest| { &m.id },
-                |m: &mut HeartbeatRequest| { &mut m.id },
+                |m: &HeartbeatRequest| &m.id,
+                |m: &mut HeartbeatRequest| &mut m.id,
             ));
-            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeString,
+            >(
                 "endpoint",
-                |m: &HeartbeatRequest| { &m.endpoint },
-                |m: &mut HeartbeatRequest| { &mut m.endpoint },
+                |m: &HeartbeatRequest| &m.endpoint,
+                |m: &mut HeartbeatRequest| &mut m.endpoint,
             ));
             ::protobuf::reflect::MessageDescriptor::new_pb_name::<HeartbeatRequest>(
                 "HeartbeatRequest",
                 fields,
-                file_descriptor_proto()
+                file_descriptor_proto(),
             )
         })
     }
@@ -1083,7 +1182,7 @@ impl ::protobuf::reflect::ProtobufValue for HeartbeatRequest {
     }
 }
 
-#[derive(PartialEq,Clone,Default)]
+#[derive(PartialEq, Clone, Default)]
 #[cfg_attr(feature = "with-serde", derive(Serialize, Deserialize))]
 pub struct HeartbeatResponse {
     // special fields
@@ -1115,8 +1214,13 @@ impl ::protobuf::Message for HeartbeatResponse {
             let (field_number, wire_type) = is.read_tag_unpack()?;
             match field_number {
                 _ => {
-                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
-                },
+                    ::protobuf::rt::read_unknown_or_skip_group(
+                        field_number,
+                        wire_type,
+                        is,
+                        self.mut_unknown_fields(),
+                    )?;
+                }
             };
         }
         ::std::result::Result::Ok(())
@@ -1131,7 +1235,10 @@ impl ::protobuf::Message for HeartbeatResponse {
         my_size
     }
 
-    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::ProtobufResult<()> {
+    fn write_to_with_cached_sizes(
+        &self,
+        os: &mut ::protobuf::CodedOutputStream<'_>,
+    ) -> ::protobuf::ProtobufResult<()> {
         os.write_unknown_fields(self.get_unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -1151,9 +1258,11 @@ impl ::protobuf::Message for HeartbeatResponse {
     fn as_any(&self) -> &dyn (::std::any::Any) {
         self as &dyn (::std::any::Any)
     }
+
     fn as_any_mut(&mut self) -> &mut dyn (::std::any::Any) {
         self as &mut dyn (::std::any::Any)
     }
+
     fn into_any(self: ::std::boxed::Box<Self>) -> ::std::boxed::Box<dyn (::std::any::Any)> {
         self
     }
@@ -1167,13 +1276,14 @@ impl ::protobuf::Message for HeartbeatResponse {
     }
 
     fn descriptor_static() -> &'static ::protobuf::reflect::MessageDescriptor {
-        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::LazyV2::INIT;
+        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> =
+            ::protobuf::rt::LazyV2::INIT;
         descriptor.get(|| {
             let fields = ::std::vec::Vec::new();
             ::protobuf::reflect::MessageDescriptor::new_pb_name::<HeartbeatResponse>(
                 "HeartbeatResponse",
                 fields,
-                file_descriptor_proto()
+                file_descriptor_proto(),
             )
         })
     }
@@ -1224,14 +1334,13 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     \x02\x03Hub\xca\x02\x03Hubb\x06proto3\
 ";
 
-static file_descriptor_proto_lazy: ::protobuf::rt::LazyV2<::protobuf::descriptor::FileDescriptorProto> = ::protobuf::rt::LazyV2::INIT;
+static file_descriptor_proto_lazy: ::protobuf::rt::LazyV2<::protobuf::descriptor::FileDescriptorProto> =
+    ::protobuf::rt::LazyV2::INIT;
 
 fn parse_descriptor_proto() -> ::protobuf::descriptor::FileDescriptorProto {
     ::protobuf::parse_from_bytes(file_descriptor_proto_data).unwrap()
 }
 
 pub fn file_descriptor_proto() -> &'static ::protobuf::descriptor::FileDescriptorProto {
-    file_descriptor_proto_lazy.get(|| {
-        parse_descriptor_proto()
-    })
+    file_descriptor_proto_lazy.get(|| parse_descriptor_proto())
 }

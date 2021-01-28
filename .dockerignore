@@ -4,3 +4,4 @@
 !raftcat/static
 !shipcat.x86_64-unknown-linux-musl
 !kong-configurator
+!requirements.txt

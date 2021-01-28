@@ -23,7 +23,7 @@
 /// of protobuf runtime.
 // const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_2_16_2;
 
-#[derive(PartialEq,Clone,Default)]
+#[derive(PartialEq, Clone, Default)]
 #[cfg_attr(feature = "with-serde", derive(Serialize, Deserialize))]
 pub struct IsDeploying {
     // message fields
@@ -52,6 +52,7 @@ impl IsDeploying {
     pub fn get_status(&self) -> IsDeploying_Status {
         self.status
     }
+
     pub fn clear_status(&mut self) {
         self.status = IsDeploying_Status::STATUS_INVALID;
     }
@@ -71,12 +72,21 @@ impl ::protobuf::Message for IsDeploying {
         while !is.eof()? {
             let (field_number, wire_type) = is.read_tag_unpack()?;
             match field_number {
-                1 => {
-                    ::protobuf::rt::read_proto3_enum_with_unknown_fields_into(wire_type, is, &mut self.status, 1, &mut self.unknown_fields)?
-                },
+                1 => ::protobuf::rt::read_proto3_enum_with_unknown_fields_into(
+                    wire_type,
+                    is,
+                    &mut self.status,
+                    1,
+                    &mut self.unknown_fields,
+                )?,
                 _ => {
-                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
-                },
+                    ::protobuf::rt::read_unknown_or_skip_group(
+                        field_number,
+                        wire_type,
+                        is,
+                        self.mut_unknown_fields(),
+                    )?;
+                }
             };
         }
         ::std::result::Result::Ok(())
@@ -94,7 +104,10 @@ impl ::protobuf::Message for IsDeploying {
         my_size
     }
 
-    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::ProtobufResult<()> {
+    fn write_to_with_cached_sizes(
+        &self,
+        os: &mut ::protobuf::CodedOutputStream<'_>,
+    ) -> ::protobuf::ProtobufResult<()> {
         if self.status != IsDeploying_Status::STATUS_INVALID {
             os.write_enum(1, ::protobuf::ProtobufEnum::value(&self.status))?;
         }
@@ -117,9 +130,11 @@ impl ::protobuf::Message for IsDeploying {
     fn as_any(&self) -> &dyn (::std::any::Any) {
         self as &dyn (::std::any::Any)
     }
+
     fn as_any_mut(&mut self) -> &mut dyn (::std::any::Any) {
         self as &mut dyn (::std::any::Any)
     }
+
     fn into_any(self: ::std::boxed::Box<Self>) -> ::std::boxed::Box<dyn (::std::any::Any)> {
         self
     }
@@ -133,18 +148,22 @@ impl ::protobuf::Message for IsDeploying {
     }
 
     fn descriptor_static() -> &'static ::protobuf::reflect::MessageDescriptor {
-        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::LazyV2::INIT;
+        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> =
+            ::protobuf::rt::LazyV2::INIT;
         descriptor.get(|| {
             let mut fields = ::std::vec::Vec::new();
-            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeEnum<IsDeploying_Status>>(
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeEnum<IsDeploying_Status>,
+            >(
                 "status",
-                |m: &IsDeploying| { &m.status },
-                |m: &mut IsDeploying| { &mut m.status },
+                |m: &IsDeploying| &m.status,
+                |m: &mut IsDeploying| &mut m.status,
             ));
             ::protobuf::reflect::MessageDescriptor::new_pb_name::<IsDeploying>(
                 "IsDeploying",
                 fields,
-                file_descriptor_proto()
+                file_descriptor_proto(),
             )
         })
     }
@@ -174,7 +193,7 @@ impl ::protobuf::reflect::ProtobufValue for IsDeploying {
     }
 }
 
-#[derive(Clone,PartialEq,Eq,Debug,Hash)]
+#[derive(Clone, PartialEq, Eq, Debug, Hash)]
 #[cfg_attr(feature = "with-serde", derive(Serialize, Deserialize))]
 pub enum IsDeploying_Status {
     STATUS_INVALID = 0,
@@ -192,7 +211,7 @@ impl ::protobuf::ProtobufEnum for IsDeploying_Status {
             0 => ::std::option::Option::Some(IsDeploying_Status::STATUS_INVALID),
             1 => ::std::option::Option::Some(IsDeploying_Status::STATUS_IN_PROGRESS),
             2 => ::std::option::Option::Some(IsDeploying_Status::STATUS_COMPLETE),
-            _ => ::std::option::Option::None
+            _ => ::std::option::Option::None,
         }
     }
 
@@ -206,15 +225,18 @@ impl ::protobuf::ProtobufEnum for IsDeploying_Status {
     }
 
     fn enum_descriptor_static() -> &'static ::protobuf::reflect::EnumDescriptor {
-        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::EnumDescriptor> = ::protobuf::rt::LazyV2::INIT;
+        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::EnumDescriptor> =
+            ::protobuf::rt::LazyV2::INIT;
         descriptor.get(|| {
-            ::protobuf::reflect::EnumDescriptor::new_pb_name::<IsDeploying_Status>("IsDeploying.Status", file_descriptor_proto())
+            ::protobuf::reflect::EnumDescriptor::new_pb_name::<IsDeploying_Status>(
+                "IsDeploying.Status",
+                file_descriptor_proto(),
+            )
         })
     }
 }
 
-impl ::std::marker::Copy for IsDeploying_Status {
-}
+impl ::std::marker::Copy for IsDeploying_Status {}
 
 impl ::std::default::Default for IsDeploying_Status {
     fn default() -> Self {
@@ -228,7 +250,7 @@ impl ::protobuf::reflect::ProtobufValue for IsDeploying_Status {
     }
 }
 
-#[derive(PartialEq,Clone,Default)]
+#[derive(PartialEq, Clone, Default)]
 #[cfg_attr(feature = "with-serde", derive(Serialize, Deserialize))]
 pub struct Error {
     // message fields
@@ -260,6 +282,7 @@ impl Error {
     pub fn get_resource(&self) -> &str {
         &self.resource
     }
+
     pub fn clear_resource(&mut self) {
         self.resource.clear();
     }
@@ -286,6 +309,7 @@ impl Error {
     pub fn get_name(&self) -> &str {
         &self.name
     }
+
     pub fn clear_name(&mut self) {
         self.name.clear();
     }
@@ -312,6 +336,7 @@ impl Error {
     pub fn get_description(&self) -> &str {
         &self.description
     }
+
     pub fn clear_description(&mut self) {
         self.description.clear();
     }
@@ -338,6 +363,7 @@ impl Error {
     pub fn get_field_type(&self) -> Error_Types {
         self.field_type
     }
+
     pub fn clear_field_type(&mut self) {
         self.field_type = Error_Types::TYPES_INVALID;
     }
@@ -359,19 +385,28 @@ impl ::protobuf::Message for Error {
             match field_number {
                 1 => {
                     ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.resource)?;
-                },
+                }
                 2 => {
                     ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.name)?;
-                },
+                }
                 3 => {
                     ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.description)?;
-                },
-                4 => {
-                    ::protobuf::rt::read_proto3_enum_with_unknown_fields_into(wire_type, is, &mut self.field_type, 4, &mut self.unknown_fields)?
-                },
+                }
+                4 => ::protobuf::rt::read_proto3_enum_with_unknown_fields_into(
+                    wire_type,
+                    is,
+                    &mut self.field_type,
+                    4,
+                    &mut self.unknown_fields,
+                )?,
                 _ => {
-                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
-                },
+                    ::protobuf::rt::read_unknown_or_skip_group(
+                        field_number,
+                        wire_type,
+                        is,
+                        self.mut_unknown_fields(),
+                    )?;
+                }
             };
         }
         ::std::result::Result::Ok(())
@@ -398,7 +433,10 @@ impl ::protobuf::Message for Error {
         my_size
     }
 
-    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::ProtobufResult<()> {
+    fn write_to_with_cached_sizes(
+        &self,
+        os: &mut ::protobuf::CodedOutputStream<'_>,
+    ) -> ::protobuf::ProtobufResult<()> {
         if !self.resource.is_empty() {
             os.write_string(1, &self.resource)?;
         }
@@ -430,9 +468,11 @@ impl ::protobuf::Message for Error {
     fn as_any(&self) -> &dyn (::std::any::Any) {
         self as &dyn (::std::any::Any)
     }
+
     fn as_any_mut(&mut self) -> &mut dyn (::std::any::Any) {
         self as &mut dyn (::std::any::Any)
     }
+
     fn into_any(self: ::std::boxed::Box<Self>) -> ::std::boxed::Box<dyn (::std::any::Any)> {
         self
     }
@@ -446,33 +486,44 @@ impl ::protobuf::Message for Error {
     }
 
     fn descriptor_static() -> &'static ::protobuf::reflect::MessageDescriptor {
-        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::LazyV2::INIT;
+        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> =
+            ::protobuf::rt::LazyV2::INIT;
         descriptor.get(|| {
             let mut fields = ::std::vec::Vec::new();
-            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeString,
+            >(
                 "resource",
-                |m: &Error| { &m.resource },
-                |m: &mut Error| { &mut m.resource },
+                |m: &Error| &m.resource,
+                |m: &mut Error| &mut m.resource,
             ));
-            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
-                "name",
-                |m: &Error| { &m.name },
-                |m: &mut Error| { &mut m.name },
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeString,
+            >(
+                "name", |m: &Error| &m.name, |m: &mut Error| &mut m.name
             ));
-            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeString,
+            >(
                 "description",
-                |m: &Error| { &m.description },
-                |m: &mut Error| { &mut m.description },
+                |m: &Error| &m.description,
+                |m: &mut Error| &mut m.description,
             ));
-            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeEnum<Error_Types>>(
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeEnum<Error_Types>,
+            >(
                 "type",
-                |m: &Error| { &m.field_type },
-                |m: &mut Error| { &mut m.field_type },
+                |m: &Error| &m.field_type,
+                |m: &mut Error| &mut m.field_type,
             ));
             ::protobuf::reflect::MessageDescriptor::new_pb_name::<Error>(
                 "Error",
                 fields,
-                file_descriptor_proto()
+                file_descriptor_proto(),
             )
         })
     }
@@ -505,7 +556,7 @@ impl ::protobuf::reflect::ProtobufValue for Error {
     }
 }
 
-#[derive(Clone,PartialEq,Eq,Debug,Hash)]
+#[derive(Clone, PartialEq, Eq, Debug, Hash)]
 #[cfg_attr(feature = "with-serde", derive(Serialize, Deserialize))]
 pub enum Error_Types {
     TYPES_INVALID = 0,
@@ -525,7 +576,7 @@ impl ::protobuf::ProtobufEnum for Error_Types {
             1 => ::std::option::Option::Some(Error_Types::TYPES_INFO),
             2 => ::std::option::Option::Some(Error_Types::TYPES_WARNING),
             3 => ::std::option::Option::Some(Error_Types::TYPES_CRITICAL),
-            _ => ::std::option::Option::None
+            _ => ::std::option::Option::None,
         }
     }
 
@@ -540,15 +591,18 @@ impl ::protobuf::ProtobufEnum for Error_Types {
     }
 
     fn enum_descriptor_static() -> &'static ::protobuf::reflect::EnumDescriptor {
-        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::EnumDescriptor> = ::protobuf::rt::LazyV2::INIT;
+        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::EnumDescriptor> =
+            ::protobuf::rt::LazyV2::INIT;
         descriptor.get(|| {
-            ::protobuf::reflect::EnumDescriptor::new_pb_name::<Error_Types>("Error.Types", file_descriptor_proto())
+            ::protobuf::reflect::EnumDescriptor::new_pb_name::<Error_Types>(
+                "Error.Types",
+                file_descriptor_proto(),
+            )
         })
     }
 }
 
-impl ::std::marker::Copy for Error_Types {
-}
+impl ::std::marker::Copy for Error_Types {}
 
 impl ::std::default::Default for Error_Types {
     fn default() -> Self {
@@ -562,7 +616,7 @@ impl ::protobuf::reflect::ProtobufValue for Error_Types {
     }
 }
 
-#[derive(PartialEq,Clone,Default)]
+#[derive(PartialEq, Clone, Default)]
 #[cfg_attr(feature = "with-serde", derive(Serialize, Deserialize))]
 pub struct Service {
     // message fields
@@ -600,6 +654,7 @@ impl Service {
     pub fn get_name(&self) -> &str {
         &self.name
     }
+
     pub fn clear_name(&mut self) {
         self.name.clear();
     }
@@ -626,6 +681,7 @@ impl Service {
     pub fn get_version(&self) -> &str {
         &self.version
     }
+
     pub fn clear_version(&mut self) {
         self.version.clear();
     }
@@ -649,25 +705,35 @@ impl Service {
     // repeated .hub.Service.SelectorsEntry selectors = 3;
 
 
-    pub fn get_selectors(&self) -> &::std::collections::HashMap<::std::string::String, ::std::string::String> {
+    pub fn get_selectors(
+        &self,
+    ) -> &::std::collections::HashMap<::std::string::String, ::std::string::String> {
         &self.selectors
     }
+
     pub fn clear_selectors(&mut self) {
         self.selectors.clear();
     }
 
     // Param is passed by value, moved
-    pub fn set_selectors(&mut self, v: ::std::collections::HashMap<::std::string::String, ::std::string::String>) {
+    pub fn set_selectors(
+        &mut self,
+        v: ::std::collections::HashMap<::std::string::String, ::std::string::String>,
+    ) {
         self.selectors = v;
     }
 
     // Mutable pointer to the field.
-    pub fn mut_selectors(&mut self) -> &mut ::std::collections::HashMap<::std::string::String, ::std::string::String> {
+    pub fn mut_selectors(
+        &mut self,
+    ) -> &mut ::std::collections::HashMap<::std::string::String, ::std::string::String> {
         &mut self.selectors
     }
 
     // Take field
-    pub fn take_selectors(&mut self) -> ::std::collections::HashMap<::std::string::String, ::std::string::String> {
+    pub fn take_selectors(
+        &mut self,
+    ) -> ::std::collections::HashMap<::std::string::String, ::std::string::String> {
         ::std::mem::replace(&mut self.selectors, ::std::collections::HashMap::new())
     }
 
@@ -677,22 +743,30 @@ impl Service {
     pub fn get_errors(&self) -> &::std::collections::HashMap<::std::string::String, Service_RepeatedError> {
         &self.errors
     }
+
     pub fn clear_errors(&mut self) {
         self.errors.clear();
     }
 
     // Param is passed by value, moved
-    pub fn set_errors(&mut self, v: ::std::collections::HashMap<::std::string::String, Service_RepeatedError>) {
+    pub fn set_errors(
+        &mut self,
+        v: ::std::collections::HashMap<::std::string::String, Service_RepeatedError>,
+    ) {
         self.errors = v;
     }
 
     // Mutable pointer to the field.
-    pub fn mut_errors(&mut self) -> &mut ::std::collections::HashMap<::std::string::String, Service_RepeatedError> {
+    pub fn mut_errors(
+        &mut self,
+    ) -> &mut ::std::collections::HashMap<::std::string::String, Service_RepeatedError> {
         &mut self.errors
     }
 
     // Take field
-    pub fn take_errors(&mut self) -> ::std::collections::HashMap<::std::string::String, Service_RepeatedError> {
+    pub fn take_errors(
+        &mut self,
+    ) -> ::std::collections::HashMap<::std::string::String, Service_RepeatedError> {
         ::std::mem::replace(&mut self.errors, ::std::collections::HashMap::new())
     }
 
@@ -700,8 +774,11 @@ impl Service {
 
 
     pub fn get_kubernetes(&self) -> &Service_Kubernetes {
-        self.kubernetes.as_ref().unwrap_or_else(|| <Service_Kubernetes as ::protobuf::Message>::default_instance())
+        self.kubernetes
+            .as_ref()
+            .unwrap_or_else(|| <Service_Kubernetes as ::protobuf::Message>::default_instance())
     }
+
     pub fn clear_kubernetes(&mut self) {
         self.kubernetes.clear();
     }
@@ -726,7 +803,9 @@ impl Service {
 
     // Take field
     pub fn take_kubernetes(&mut self) -> Service_Kubernetes {
-        self.kubernetes.take().unwrap_or_else(|| Service_Kubernetes::new())
+        self.kubernetes
+            .take()
+            .unwrap_or_else(|| Service_Kubernetes::new())
     }
 
     // repeated .hub.Service.MetaEntry meta = 6;
@@ -735,6 +814,7 @@ impl Service {
     pub fn get_meta(&self) -> &::std::collections::HashMap<::std::string::String, ::std::string::String> {
         &self.meta
     }
+
     pub fn clear_meta(&mut self) {
         self.meta.clear();
     }
@@ -745,7 +825,9 @@ impl Service {
     }
 
     // Mutable pointer to the field.
-    pub fn mut_meta(&mut self) -> &mut ::std::collections::HashMap<::std::string::String, ::std::string::String> {
+    pub fn mut_meta(
+        &mut self,
+    ) -> &mut ::std::collections::HashMap<::std::string::String, ::std::string::String> {
         &mut self.meta
     }
 
@@ -760,6 +842,7 @@ impl Service {
     pub fn get_namespace(&self) -> &str {
         &self.namespace
     }
+
     pub fn clear_namespace(&mut self) {
         self.namespace.clear();
     }
@@ -786,6 +869,7 @@ impl Service {
     pub fn get_cluster(&self) -> &str {
         &self.cluster
     }
+
     pub fn clear_cluster(&mut self) {
         self.cluster.clear();
     }
@@ -812,6 +896,7 @@ impl Service {
     pub fn get_environment(&self) -> &str {
         &self.environment
     }
+
     pub fn clear_environment(&mut self) {
         self.environment.clear();
     }
@@ -838,6 +923,7 @@ impl Service {
     pub fn get_plugins(&self) -> &::std::collections::HashMap<::std::string::String, Plugin> {
         &self.plugins
     }
+
     pub fn clear_plugins(&mut self) {
         self.plugins.clear();
     }
@@ -864,7 +950,7 @@ impl ::protobuf::Message for Service {
             if !v.is_initialized() {
                 return false;
             }
-        };
+        }
         true
     }
 
@@ -874,37 +960,54 @@ impl ::protobuf::Message for Service {
             match field_number {
                 1 => {
                     ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.name)?;
-                },
+                }
                 2 => {
                     ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.version)?;
-                },
+                }
                 3 => {
-                    ::protobuf::rt::read_map_into::<::protobuf::types::ProtobufTypeString, ::protobuf::types::ProtobufTypeString>(wire_type, is, &mut self.selectors)?;
-                },
+                    ::protobuf::rt::read_map_into::<
+                        ::protobuf::types::ProtobufTypeString,
+                        ::protobuf::types::ProtobufTypeString,
+                    >(wire_type, is, &mut self.selectors)?;
+                }
                 4 => {
-                    ::protobuf::rt::read_map_into::<::protobuf::types::ProtobufTypeString, ::protobuf::types::ProtobufTypeMessage<Service_RepeatedError>>(wire_type, is, &mut self.errors)?;
-                },
+                    ::protobuf::rt::read_map_into::<
+                        ::protobuf::types::ProtobufTypeString,
+                        ::protobuf::types::ProtobufTypeMessage<Service_RepeatedError>,
+                    >(wire_type, is, &mut self.errors)?;
+                }
                 5 => {
                     ::protobuf::rt::read_singular_message_into(wire_type, is, &mut self.kubernetes)?;
-                },
+                }
                 6 => {
-                    ::protobuf::rt::read_map_into::<::protobuf::types::ProtobufTypeString, ::protobuf::types::ProtobufTypeString>(wire_type, is, &mut self.meta)?;
-                },
+                    ::protobuf::rt::read_map_into::<
+                        ::protobuf::types::ProtobufTypeString,
+                        ::protobuf::types::ProtobufTypeString,
+                    >(wire_type, is, &mut self.meta)?;
+                }
                 7 => {
                     ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.namespace)?;
-                },
+                }
                 8 => {
                     ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.cluster)?;
-                },
+                }
                 9 => {
                     ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.environment)?;
-                },
+                }
                 10 => {
-                    ::protobuf::rt::read_map_into::<::protobuf::types::ProtobufTypeString, ::protobuf::types::ProtobufTypeMessage<Plugin>>(wire_type, is, &mut self.plugins)?;
-                },
+                    ::protobuf::rt::read_map_into::<
+                        ::protobuf::types::ProtobufTypeString,
+                        ::protobuf::types::ProtobufTypeMessage<Plugin>,
+                    >(wire_type, is, &mut self.plugins)?;
+                }
                 _ => {
-                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
-                },
+                    ::protobuf::rt::read_unknown_or_skip_group(
+                        field_number,
+                        wire_type,
+                        is,
+                        self.mut_unknown_fields(),
+                    )?;
+                }
             };
         }
         ::std::result::Result::Ok(())
@@ -920,13 +1023,22 @@ impl ::protobuf::Message for Service {
         if !self.version.is_empty() {
             my_size += ::protobuf::rt::string_size(2, &self.version);
         }
-        my_size += ::protobuf::rt::compute_map_size::<::protobuf::types::ProtobufTypeString, ::protobuf::types::ProtobufTypeString>(3, &self.selectors);
-        my_size += ::protobuf::rt::compute_map_size::<::protobuf::types::ProtobufTypeString, ::protobuf::types::ProtobufTypeMessage<Service_RepeatedError>>(4, &self.errors);
+        my_size += ::protobuf::rt::compute_map_size::<
+            ::protobuf::types::ProtobufTypeString,
+            ::protobuf::types::ProtobufTypeString,
+        >(3, &self.selectors);
+        my_size += ::protobuf::rt::compute_map_size::<
+            ::protobuf::types::ProtobufTypeString,
+            ::protobuf::types::ProtobufTypeMessage<Service_RepeatedError>,
+        >(4, &self.errors);
         if let Some(ref v) = self.kubernetes.as_ref() {
             let len = v.compute_size();
             my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
         }
-        my_size += ::protobuf::rt::compute_map_size::<::protobuf::types::ProtobufTypeString, ::protobuf::types::ProtobufTypeString>(6, &self.meta);
+        my_size += ::protobuf::rt::compute_map_size::<
+            ::protobuf::types::ProtobufTypeString,
+            ::protobuf::types::ProtobufTypeString,
+        >(6, &self.meta);
         if !self.namespace.is_empty() {
             my_size += ::protobuf::rt::string_size(7, &self.namespace);
         }
@@ -936,27 +1048,42 @@ impl ::protobuf::Message for Service {
         if !self.environment.is_empty() {
             my_size += ::protobuf::rt::string_size(9, &self.environment);
         }
-        my_size += ::protobuf::rt::compute_map_size::<::protobuf::types::ProtobufTypeString, ::protobuf::types::ProtobufTypeMessage<Plugin>>(10, &self.plugins);
+        my_size += ::protobuf::rt::compute_map_size::<
+            ::protobuf::types::ProtobufTypeString,
+            ::protobuf::types::ProtobufTypeMessage<Plugin>,
+        >(10, &self.plugins);
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
         my_size
     }
 
-    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::ProtobufResult<()> {
+    fn write_to_with_cached_sizes(
+        &self,
+        os: &mut ::protobuf::CodedOutputStream<'_>,
+    ) -> ::protobuf::ProtobufResult<()> {
         if !self.name.is_empty() {
             os.write_string(1, &self.name)?;
         }
         if !self.version.is_empty() {
             os.write_string(2, &self.version)?;
         }
-        ::protobuf::rt::write_map_with_cached_sizes::<::protobuf::types::ProtobufTypeString, ::protobuf::types::ProtobufTypeString>(3, &self.selectors, os)?;
-        ::protobuf::rt::write_map_with_cached_sizes::<::protobuf::types::ProtobufTypeString, ::protobuf::types::ProtobufTypeMessage<Service_RepeatedError>>(4, &self.errors, os)?;
+        ::protobuf::rt::write_map_with_cached_sizes::<
+            ::protobuf::types::ProtobufTypeString,
+            ::protobuf::types::ProtobufTypeString,
+        >(3, &self.selectors, os)?;
+        ::protobuf::rt::write_map_with_cached_sizes::<
+            ::protobuf::types::ProtobufTypeString,
+            ::protobuf::types::ProtobufTypeMessage<Service_RepeatedError>,
+        >(4, &self.errors, os)?;
         if let Some(ref v) = self.kubernetes.as_ref() {
             os.write_tag(5, ::protobuf::wire_format::WireTypeLengthDelimited)?;
             os.write_raw_varint32(v.get_cached_size())?;
             v.write_to_with_cached_sizes(os)?;
         }
-        ::protobuf::rt::write_map_with_cached_sizes::<::protobuf::types::ProtobufTypeString, ::protobuf::types::ProtobufTypeString>(6, &self.meta, os)?;
+        ::protobuf::rt::write_map_with_cached_sizes::<
+            ::protobuf::types::ProtobufTypeString,
+            ::protobuf::types::ProtobufTypeString,
+        >(6, &self.meta, os)?;
         if !self.namespace.is_empty() {
             os.write_string(7, &self.namespace)?;
         }
@@ -966,7 +1093,10 @@ impl ::protobuf::Message for Service {
         if !self.environment.is_empty() {
             os.write_string(9, &self.environment)?;
         }
-        ::protobuf::rt::write_map_with_cached_sizes::<::protobuf::types::ProtobufTypeString, ::protobuf::types::ProtobufTypeMessage<Plugin>>(10, &self.plugins, os)?;
+        ::protobuf::rt::write_map_with_cached_sizes::<
+            ::protobuf::types::ProtobufTypeString,
+            ::protobuf::types::ProtobufTypeMessage<Plugin>,
+        >(10, &self.plugins, os)?;
         os.write_unknown_fields(self.get_unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -986,9 +1116,11 @@ impl ::protobuf::Message for Service {
     fn as_any(&self) -> &dyn (::std::any::Any) {
         self as &dyn (::std::any::Any)
     }
+
     fn as_any_mut(&mut self) -> &mut dyn (::std::any::Any) {
         self as &mut dyn (::std::any::Any)
     }
+
     fn into_any(self: ::std::boxed::Box<Self>) -> ::std::boxed::Box<dyn (::std::any::Any)> {
         self
     }
@@ -1002,63 +1134,94 @@ impl ::protobuf::Message for Service {
     }
 
     fn descriptor_static() -> &'static ::protobuf::reflect::MessageDescriptor {
-        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::LazyV2::INIT;
+        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> =
+            ::protobuf::rt::LazyV2::INIT;
         descriptor.get(|| {
             let mut fields = ::std::vec::Vec::new();
-            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
-                "name",
-                |m: &Service| { &m.name },
-                |m: &mut Service| { &mut m.name },
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeString,
+            >(
+                "name", |m: &Service| &m.name, |m: &mut Service| &mut m.name
             ));
-            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeString,
+            >(
                 "version",
-                |m: &Service| { &m.version },
-                |m: &mut Service| { &mut m.version },
+                |m: &Service| &m.version,
+                |m: &mut Service| &mut m.version,
             ));
-            fields.push(::protobuf::reflect::accessor::make_map_accessor::<_, ::protobuf::types::ProtobufTypeString, ::protobuf::types::ProtobufTypeString>(
+            fields.push(::protobuf::reflect::accessor::make_map_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeString,
+                ::protobuf::types::ProtobufTypeString,
+            >(
                 "selectors",
-                |m: &Service| { &m.selectors },
-                |m: &mut Service| { &mut m.selectors },
+                |m: &Service| &m.selectors,
+                |m: &mut Service| &mut m.selectors,
             ));
-            fields.push(::protobuf::reflect::accessor::make_map_accessor::<_, ::protobuf::types::ProtobufTypeString, ::protobuf::types::ProtobufTypeMessage<Service_RepeatedError>>(
+            fields.push(::protobuf::reflect::accessor::make_map_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeString,
+                ::protobuf::types::ProtobufTypeMessage<Service_RepeatedError>,
+            >(
                 "errors",
-                |m: &Service| { &m.errors },
-                |m: &mut Service| { &mut m.errors },
+                |m: &Service| &m.errors,
+                |m: &mut Service| &mut m.errors,
             ));
-            fields.push(::protobuf::reflect::accessor::make_singular_ptr_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<Service_Kubernetes>>(
+            fields.push(::protobuf::reflect::accessor::make_singular_ptr_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeMessage<Service_Kubernetes>,
+            >(
                 "kubernetes",
-                |m: &Service| { &m.kubernetes },
-                |m: &mut Service| { &mut m.kubernetes },
+                |m: &Service| &m.kubernetes,
+                |m: &mut Service| &mut m.kubernetes,
             ));
-            fields.push(::protobuf::reflect::accessor::make_map_accessor::<_, ::protobuf::types::ProtobufTypeString, ::protobuf::types::ProtobufTypeString>(
-                "meta",
-                |m: &Service| { &m.meta },
-                |m: &mut Service| { &mut m.meta },
+            fields.push(::protobuf::reflect::accessor::make_map_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeString,
+                ::protobuf::types::ProtobufTypeString,
+            >(
+                "meta", |m: &Service| &m.meta, |m: &mut Service| &mut m.meta
             ));
-            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeString,
+            >(
                 "namespace",
-                |m: &Service| { &m.namespace },
-                |m: &mut Service| { &mut m.namespace },
+                |m: &Service| &m.namespace,
+                |m: &mut Service| &mut m.namespace,
             ));
-            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeString,
+            >(
                 "cluster",
-                |m: &Service| { &m.cluster },
-                |m: &mut Service| { &mut m.cluster },
+                |m: &Service| &m.cluster,
+                |m: &mut Service| &mut m.cluster,
             ));
-            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeString,
+            >(
                 "environment",
-                |m: &Service| { &m.environment },
-                |m: &mut Service| { &mut m.environment },
+                |m: &Service| &m.environment,
+                |m: &mut Service| &mut m.environment,
             ));
-            fields.push(::protobuf::reflect::accessor::make_map_accessor::<_, ::protobuf::types::ProtobufTypeString, ::protobuf::types::ProtobufTypeMessage<Plugin>>(
+            fields.push(::protobuf::reflect::accessor::make_map_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeString,
+                ::protobuf::types::ProtobufTypeMessage<Plugin>,
+            >(
                 "plugins",
-                |m: &Service| { &m.plugins },
-                |m: &mut Service| { &mut m.plugins },
+                |m: &Service| &m.plugins,
+                |m: &mut Service| &mut m.plugins,
             ));
             ::protobuf::reflect::MessageDescriptor::new_pb_name::<Service>(
                 "Service",
                 fields,
-                file_descriptor_proto()
+                file_descriptor_proto(),
             )
         })
     }
@@ -1097,7 +1260,7 @@ impl ::protobuf::reflect::ProtobufValue for Service {
     }
 }
 
-#[derive(PartialEq,Clone,Default)]
+#[derive(PartialEq, Clone, Default)]
 #[cfg_attr(feature = "with-serde", derive(Serialize, Deserialize))]
 pub struct Service_RepeatedError {
     // message fields
@@ -1126,6 +1289,7 @@ impl Service_RepeatedError {
     pub fn get_errors(&self) -> &[Error] {
         &self.errors
     }
+
     pub fn clear_errors(&mut self) {
         self.errors.clear();
     }
@@ -1152,7 +1316,7 @@ impl ::protobuf::Message for Service_RepeatedError {
             if !v.is_initialized() {
                 return false;
             }
-        };
+        }
         true
     }
 
@@ -1162,10 +1326,15 @@ impl ::protobuf::Message for Service_RepeatedError {
             match field_number {
                 1 => {
                     ::protobuf::rt::read_repeated_message_into(wire_type, is, &mut self.errors)?;
-                },
+                }
                 _ => {
-                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
-                },
+                    ::protobuf::rt::read_unknown_or_skip_group(
+                        field_number,
+                        wire_type,
+                        is,
+                        self.mut_unknown_fields(),
+                    )?;
+                }
             };
         }
         ::std::result::Result::Ok(())
@@ -1178,18 +1347,21 @@ impl ::protobuf::Message for Service_RepeatedError {
         for value in &self.errors {
             let len = value.compute_size();
             my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
-        };
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
         my_size
     }
 
-    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::ProtobufResult<()> {
+    fn write_to_with_cached_sizes(
+        &self,
+        os: &mut ::protobuf::CodedOutputStream<'_>,
+    ) -> ::protobuf::ProtobufResult<()> {
         for v in &self.errors {
             os.write_tag(1, ::protobuf::wire_format::WireTypeLengthDelimited)?;
             os.write_raw_varint32(v.get_cached_size())?;
             v.write_to_with_cached_sizes(os)?;
-        };
+        }
         os.write_unknown_fields(self.get_unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -1209,9 +1381,11 @@ impl ::protobuf::Message for Service_RepeatedError {
     fn as_any(&self) -> &dyn (::std::any::Any) {
         self as &dyn (::std::any::Any)
     }
+
     fn as_any_mut(&mut self) -> &mut dyn (::std::any::Any) {
         self as &mut dyn (::std::any::Any)
     }
+
     fn into_any(self: ::std::boxed::Box<Self>) -> ::std::boxed::Box<dyn (::std::any::Any)> {
         self
     }
@@ -1225,18 +1399,22 @@ impl ::protobuf::Message for Service_RepeatedError {
     }
 
     fn descriptor_static() -> &'static ::protobuf::reflect::MessageDescriptor {
-        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::LazyV2::INIT;
+        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> =
+            ::protobuf::rt::LazyV2::INIT;
         descriptor.get(|| {
             let mut fields = ::std::vec::Vec::new();
-            fields.push(::protobuf::reflect::accessor::make_repeated_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<Error>>(
+            fields.push(::protobuf::reflect::accessor::make_repeated_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeMessage<Error>,
+            >(
                 "errors",
-                |m: &Service_RepeatedError| { &m.errors },
-                |m: &mut Service_RepeatedError| { &mut m.errors },
+                |m: &Service_RepeatedError| &m.errors,
+                |m: &mut Service_RepeatedError| &mut m.errors,
             ));
             ::protobuf::reflect::MessageDescriptor::new_pb_name::<Service_RepeatedError>(
                 "Service.RepeatedError",
                 fields,
-                file_descriptor_proto()
+                file_descriptor_proto(),
             )
         })
     }
@@ -1266,7 +1444,7 @@ impl ::protobuf::reflect::ProtobufValue for Service_RepeatedError {
     }
 }
 
-#[derive(PartialEq,Clone,Default)]
+#[derive(PartialEq, Clone, Default)]
 #[cfg_attr(feature = "with-serde", derive(Serialize, Deserialize))]
 pub struct Service_Kubernetes {
     // message fields
@@ -1296,8 +1474,11 @@ impl Service_Kubernetes {
 
 
     pub fn get_is_deploying(&self) -> &IsDeploying {
-        self.is_deploying.as_ref().unwrap_or_else(|| <IsDeploying as ::protobuf::Message>::default_instance())
+        self.is_deploying
+            .as_ref()
+            .unwrap_or_else(|| <IsDeploying as ::protobuf::Message>::default_instance())
     }
+
     pub fn clear_is_deploying(&mut self) {
         self.is_deploying.clear();
     }
@@ -1331,6 +1512,7 @@ impl Service_Kubernetes {
     pub fn get_desired_replicas(&self) -> u32 {
         self.desired_replicas
     }
+
     pub fn clear_desired_replicas(&mut self) {
         self.desired_replicas = 0;
     }
@@ -1346,6 +1528,7 @@ impl Service_Kubernetes {
     pub fn get_available_replicas(&self) -> u32 {
         self.available_replicas
     }
+
     pub fn clear_available_replicas(&mut self) {
         self.available_replicas = 0;
     }
@@ -1361,6 +1544,7 @@ impl Service_Kubernetes {
     pub fn get_replica_sets(&self) -> &[Service_Kubernetes_ReplicaSet] {
         &self.replica_sets
     }
+
     pub fn clear_replica_sets(&mut self) {
         self.replica_sets.clear();
     }
@@ -1387,12 +1571,12 @@ impl ::protobuf::Message for Service_Kubernetes {
             if !v.is_initialized() {
                 return false;
             }
-        };
+        }
         for v in &self.replica_sets {
             if !v.is_initialized() {
                 return false;
             }
-        };
+        }
         true
     }
 
@@ -1402,27 +1586,32 @@ impl ::protobuf::Message for Service_Kubernetes {
             match field_number {
                 1 => {
                     ::protobuf::rt::read_singular_message_into(wire_type, is, &mut self.is_deploying)?;
-                },
+                }
                 2 => {
                     if wire_type != ::protobuf::wire_format::WireTypeVarint {
                         return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
                     }
                     let tmp = is.read_uint32()?;
                     self.desired_replicas = tmp;
-                },
+                }
                 3 => {
                     if wire_type != ::protobuf::wire_format::WireTypeVarint {
                         return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
                     }
                     let tmp = is.read_uint32()?;
                     self.available_replicas = tmp;
-                },
+                }
                 4 => {
                     ::protobuf::rt::read_repeated_message_into(wire_type, is, &mut self.replica_sets)?;
-                },
+                }
                 _ => {
-                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
-                },
+                    ::protobuf::rt::read_unknown_or_skip_group(
+                        field_number,
+                        wire_type,
+                        is,
+                        self.mut_unknown_fields(),
+                    )?;
+                }
             };
         }
         ::std::result::Result::Ok(())
@@ -1437,21 +1626,29 @@ impl ::protobuf::Message for Service_Kubernetes {
             my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
         }
         if self.desired_replicas != 0 {
-            my_size += ::protobuf::rt::value_size(2, self.desired_replicas, ::protobuf::wire_format::WireTypeVarint);
+            my_size +=
+                ::protobuf::rt::value_size(2, self.desired_replicas, ::protobuf::wire_format::WireTypeVarint);
         }
         if self.available_replicas != 0 {
-            my_size += ::protobuf::rt::value_size(3, self.available_replicas, ::protobuf::wire_format::WireTypeVarint);
+            my_size += ::protobuf::rt::value_size(
+                3,
+                self.available_replicas,
+                ::protobuf::wire_format::WireTypeVarint,
+            );
         }
         for value in &self.replica_sets {
             let len = value.compute_size();
             my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
-        };
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
         my_size
     }
 
-    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::ProtobufResult<()> {
+    fn write_to_with_cached_sizes(
+        &self,
+        os: &mut ::protobuf::CodedOutputStream<'_>,
+    ) -> ::protobuf::ProtobufResult<()> {
         if let Some(ref v) = self.is_deploying.as_ref() {
             os.write_tag(1, ::protobuf::wire_format::WireTypeLengthDelimited)?;
             os.write_raw_varint32(v.get_cached_size())?;
@@ -1467,7 +1664,7 @@ impl ::protobuf::Message for Service_Kubernetes {
             os.write_tag(4, ::protobuf::wire_format::WireTypeLengthDelimited)?;
             os.write_raw_varint32(v.get_cached_size())?;
             v.write_to_with_cached_sizes(os)?;
-        };
+        }
         os.write_unknown_fields(self.get_unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -1487,9 +1684,11 @@ impl ::protobuf::Message for Service_Kubernetes {
     fn as_any(&self) -> &dyn (::std::any::Any) {
         self as &dyn (::std::any::Any)
     }
+
     fn as_any_mut(&mut self) -> &mut dyn (::std::any::Any) {
         self as &mut dyn (::std::any::Any)
     }
+
     fn into_any(self: ::std::boxed::Box<Self>) -> ::std::boxed::Box<dyn (::std::any::Any)> {
         self
     }
@@ -1503,33 +1702,46 @@ impl ::protobuf::Message for Service_Kubernetes {
     }
 
     fn descriptor_static() -> &'static ::protobuf::reflect::MessageDescriptor {
-        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::LazyV2::INIT;
+        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> =
+            ::protobuf::rt::LazyV2::INIT;
         descriptor.get(|| {
             let mut fields = ::std::vec::Vec::new();
-            fields.push(::protobuf::reflect::accessor::make_singular_ptr_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<IsDeploying>>(
+            fields.push(::protobuf::reflect::accessor::make_singular_ptr_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeMessage<IsDeploying>,
+            >(
                 "is_deploying",
-                |m: &Service_Kubernetes| { &m.is_deploying },
-                |m: &mut Service_Kubernetes| { &mut m.is_deploying },
+                |m: &Service_Kubernetes| &m.is_deploying,
+                |m: &mut Service_Kubernetes| &mut m.is_deploying,
             ));
-            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeUint32>(
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeUint32,
+            >(
                 "desired_replicas",
-                |m: &Service_Kubernetes| { &m.desired_replicas },
-                |m: &mut Service_Kubernetes| { &mut m.desired_replicas },
+                |m: &Service_Kubernetes| &m.desired_replicas,
+                |m: &mut Service_Kubernetes| &mut m.desired_replicas,
             ));
-            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeUint32>(
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeUint32,
+            >(
                 "available_replicas",
-                |m: &Service_Kubernetes| { &m.available_replicas },
-                |m: &mut Service_Kubernetes| { &mut m.available_replicas },
+                |m: &Service_Kubernetes| &m.available_replicas,
+                |m: &mut Service_Kubernetes| &mut m.available_replicas,
             ));
-            fields.push(::protobuf::reflect::accessor::make_repeated_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<Service_Kubernetes_ReplicaSet>>(
+            fields.push(::protobuf::reflect::accessor::make_repeated_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeMessage<Service_Kubernetes_ReplicaSet>,
+            >(
                 "replica_sets",
-                |m: &Service_Kubernetes| { &m.replica_sets },
-                |m: &mut Service_Kubernetes| { &mut m.replica_sets },
+                |m: &Service_Kubernetes| &m.replica_sets,
+                |m: &mut Service_Kubernetes| &mut m.replica_sets,
             ));
             ::protobuf::reflect::MessageDescriptor::new_pb_name::<Service_Kubernetes>(
                 "Service.Kubernetes",
                 fields,
-                file_descriptor_proto()
+                file_descriptor_proto(),
             )
         })
     }
@@ -1562,7 +1774,7 @@ impl ::protobuf::reflect::ProtobufValue for Service_Kubernetes {
     }
 }
 
-#[derive(PartialEq,Clone,Default)]
+#[derive(PartialEq, Clone, Default)]
 #[cfg_attr(feature = "with-serde", derive(Serialize, Deserialize))]
 pub struct Service_Kubernetes_ReplicaSet {
     // message fields
@@ -1595,6 +1807,7 @@ impl Service_Kubernetes_ReplicaSet {
     pub fn get_version(&self) -> &str {
         &self.version
     }
+
     pub fn clear_version(&mut self) {
         self.version.clear();
     }
@@ -1621,6 +1834,7 @@ impl Service_Kubernetes_ReplicaSet {
     pub fn get_desired_pods(&self) -> u32 {
         self.desired_pods
     }
+
     pub fn clear_desired_pods(&mut self) {
         self.desired_pods = 0;
     }
@@ -1636,6 +1850,7 @@ impl Service_Kubernetes_ReplicaSet {
     pub fn get_available_pods(&self) -> u32 {
         self.available_pods
     }
+
     pub fn clear_available_pods(&mut self) {
         self.available_pods = 0;
     }
@@ -1651,6 +1866,7 @@ impl Service_Kubernetes_ReplicaSet {
     pub fn get_name(&self) -> &str {
         &self.name
     }
+
     pub fn clear_name(&mut self) {
         self.name.clear();
     }
@@ -1675,8 +1891,11 @@ impl Service_Kubernetes_ReplicaSet {
 
 
     pub fn get_created_at_time(&self) -> &::protobuf::well_known_types::Timestamp {
-        self.created_at_time.as_ref().unwrap_or_else(|| <::protobuf::well_known_types::Timestamp as ::protobuf::Message>::default_instance())
+        self.created_at_time.as_ref().unwrap_or_else(|| {
+            <::protobuf::well_known_types::Timestamp as ::protobuf::Message>::default_instance()
+        })
     }
+
     pub fn clear_created_at_time(&mut self) {
         self.created_at_time.clear();
     }
@@ -1701,7 +1920,9 @@ impl Service_Kubernetes_ReplicaSet {
 
     // Take field
     pub fn take_created_at_time(&mut self) -> ::protobuf::well_known_types::Timestamp {
-        self.created_at_time.take().unwrap_or_else(|| ::protobuf::well_known_types::Timestamp::new())
+        self.created_at_time
+            .take()
+            .unwrap_or_else(|| ::protobuf::well_known_types::Timestamp::new())
     }
 }
 
@@ -1711,7 +1932,7 @@ impl ::protobuf::Message for Service_Kubernetes_ReplicaSet {
             if !v.is_initialized() {
                 return false;
             }
-        };
+        }
         true
     }
 
@@ -1721,30 +1942,35 @@ impl ::protobuf::Message for Service_Kubernetes_ReplicaSet {
             match field_number {
                 1 => {
                     ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.version)?;
-                },
+                }
                 2 => {
                     if wire_type != ::protobuf::wire_format::WireTypeVarint {
                         return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
                     }
                     let tmp = is.read_uint32()?;
                     self.desired_pods = tmp;
-                },
+                }
                 3 => {
                     if wire_type != ::protobuf::wire_format::WireTypeVarint {
                         return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
                     }
                     let tmp = is.read_uint32()?;
                     self.available_pods = tmp;
-                },
+                }
                 4 => {
                     ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.name)?;
-                },
+                }
                 5 => {
                     ::protobuf::rt::read_singular_message_into(wire_type, is, &mut self.created_at_time)?;
-                },
+                }
                 _ => {
-                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
-                },
+                    ::protobuf::rt::read_unknown_or_skip_group(
+                        field_number,
+                        wire_type,
+                        is,
+                        self.mut_unknown_fields(),
+                    )?;
+                }
             };
         }
         ::std::result::Result::Ok(())
@@ -1758,10 +1984,12 @@ impl ::protobuf::Message for Service_Kubernetes_ReplicaSet {
             my_size += ::protobuf::rt::string_size(1, &self.version);
         }
         if self.desired_pods != 0 {
-            my_size += ::protobuf::rt::value_size(2, self.desired_pods, ::protobuf::wire_format::WireTypeVarint);
+            my_size +=
+                ::protobuf::rt::value_size(2, self.desired_pods, ::protobuf::wire_format::WireTypeVarint);
         }
         if self.available_pods != 0 {
-            my_size += ::protobuf::rt::value_size(3, self.available_pods, ::protobuf::wire_format::WireTypeVarint);
+            my_size +=
+                ::protobuf::rt::value_size(3, self.available_pods, ::protobuf::wire_format::WireTypeVarint);
         }
         if !self.name.is_empty() {
             my_size += ::protobuf::rt::string_size(4, &self.name);
@@ -1775,7 +2003,10 @@ impl ::protobuf::Message for Service_Kubernetes_ReplicaSet {
         my_size
     }
 
-    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::ProtobufResult<()> {
+    fn write_to_with_cached_sizes(
+        &self,
+        os: &mut ::protobuf::CodedOutputStream<'_>,
+    ) -> ::protobuf::ProtobufResult<()> {
         if !self.version.is_empty() {
             os.write_string(1, &self.version)?;
         }
@@ -1812,9 +2043,11 @@ impl ::protobuf::Message for Service_Kubernetes_ReplicaSet {
     fn as_any(&self) -> &dyn (::std::any::Any) {
         self as &dyn (::std::any::Any)
     }
+
     fn as_any_mut(&mut self) -> &mut dyn (::std::any::Any) {
         self as &mut dyn (::std::any::Any)
     }
+
     fn into_any(self: ::std::boxed::Box<Self>) -> ::std::boxed::Box<dyn (::std::any::Any)> {
         self
     }
@@ -1828,38 +2061,54 @@ impl ::protobuf::Message for Service_Kubernetes_ReplicaSet {
     }
 
     fn descriptor_static() -> &'static ::protobuf::reflect::MessageDescriptor {
-        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::LazyV2::INIT;
+        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> =
+            ::protobuf::rt::LazyV2::INIT;
         descriptor.get(|| {
             let mut fields = ::std::vec::Vec::new();
-            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeString,
+            >(
                 "version",
-                |m: &Service_Kubernetes_ReplicaSet| { &m.version },
-                |m: &mut Service_Kubernetes_ReplicaSet| { &mut m.version },
+                |m: &Service_Kubernetes_ReplicaSet| &m.version,
+                |m: &mut Service_Kubernetes_ReplicaSet| &mut m.version,
             ));
-            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeUint32>(
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeUint32,
+            >(
                 "desired_pods",
-                |m: &Service_Kubernetes_ReplicaSet| { &m.desired_pods },
-                |m: &mut Service_Kubernetes_ReplicaSet| { &mut m.desired_pods },
+                |m: &Service_Kubernetes_ReplicaSet| &m.desired_pods,
+                |m: &mut Service_Kubernetes_ReplicaSet| &mut m.desired_pods,
             ));
-            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeUint32>(
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeUint32,
+            >(
                 "available_pods",
-                |m: &Service_Kubernetes_ReplicaSet| { &m.available_pods },
-                |m: &mut Service_Kubernetes_ReplicaSet| { &mut m.available_pods },
+                |m: &Service_Kubernetes_ReplicaSet| &m.available_pods,
+                |m: &mut Service_Kubernetes_ReplicaSet| &mut m.available_pods,
             ));
-            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeString,
+            >(
                 "name",
-                |m: &Service_Kubernetes_ReplicaSet| { &m.name },
-                |m: &mut Service_Kubernetes_ReplicaSet| { &mut m.name },
+                |m: &Service_Kubernetes_ReplicaSet| &m.name,
+                |m: &mut Service_Kubernetes_ReplicaSet| &mut m.name,
             ));
-            fields.push(::protobuf::reflect::accessor::make_singular_ptr_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<::protobuf::well_known_types::Timestamp>>(
+            fields.push(::protobuf::reflect::accessor::make_singular_ptr_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeMessage<::protobuf::well_known_types::Timestamp>,
+            >(
                 "created_at_time",
-                |m: &Service_Kubernetes_ReplicaSet| { &m.created_at_time },
-                |m: &mut Service_Kubernetes_ReplicaSet| { &mut m.created_at_time },
+                |m: &Service_Kubernetes_ReplicaSet| &m.created_at_time,
+                |m: &mut Service_Kubernetes_ReplicaSet| &mut m.created_at_time,
             ));
             ::protobuf::reflect::MessageDescriptor::new_pb_name::<Service_Kubernetes_ReplicaSet>(
                 "Service.Kubernetes.ReplicaSet",
                 fields,
-                file_descriptor_proto()
+                file_descriptor_proto(),
             )
         })
     }
@@ -1893,7 +2142,7 @@ impl ::protobuf::reflect::ProtobufValue for Service_Kubernetes_ReplicaSet {
     }
 }
 
-#[derive(PartialEq,Clone,Default)]
+#[derive(PartialEq, Clone, Default)]
 #[cfg_attr(feature = "with-serde", derive(Serialize, Deserialize))]
 pub struct ServicesResponse {
     // message fields
@@ -1922,6 +2171,7 @@ impl ServicesResponse {
     pub fn get_services(&self) -> &::std::collections::HashMap<::std::string::String, Service> {
         &self.services
     }
+
     pub fn clear_services(&mut self) {
         self.services.clear();
     }
@@ -1952,11 +2202,19 @@ impl ::protobuf::Message for ServicesResponse {
             let (field_number, wire_type) = is.read_tag_unpack()?;
             match field_number {
                 1 => {
-                    ::protobuf::rt::read_map_into::<::protobuf::types::ProtobufTypeString, ::protobuf::types::ProtobufTypeMessage<Service>>(wire_type, is, &mut self.services)?;
-                },
+                    ::protobuf::rt::read_map_into::<
+                        ::protobuf::types::ProtobufTypeString,
+                        ::protobuf::types::ProtobufTypeMessage<Service>,
+                    >(wire_type, is, &mut self.services)?;
+                }
                 _ => {
-                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
-                },
+                    ::protobuf::rt::read_unknown_or_skip_group(
+                        field_number,
+                        wire_type,
+                        is,
+                        self.mut_unknown_fields(),
+                    )?;
+                }
             };
         }
         ::std::result::Result::Ok(())
@@ -1966,14 +2224,23 @@ impl ::protobuf::Message for ServicesResponse {
     #[allow(unused_variables)]
     fn compute_size(&self) -> u32 {
         let mut my_size = 0;
-        my_size += ::protobuf::rt::compute_map_size::<::protobuf::types::ProtobufTypeString, ::protobuf::types::ProtobufTypeMessage<Service>>(1, &self.services);
+        my_size += ::protobuf::rt::compute_map_size::<
+            ::protobuf::types::ProtobufTypeString,
+            ::protobuf::types::ProtobufTypeMessage<Service>,
+        >(1, &self.services);
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
         my_size
     }
 
-    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::ProtobufResult<()> {
-        ::protobuf::rt::write_map_with_cached_sizes::<::protobuf::types::ProtobufTypeString, ::protobuf::types::ProtobufTypeMessage<Service>>(1, &self.services, os)?;
+    fn write_to_with_cached_sizes(
+        &self,
+        os: &mut ::protobuf::CodedOutputStream<'_>,
+    ) -> ::protobuf::ProtobufResult<()> {
+        ::protobuf::rt::write_map_with_cached_sizes::<
+            ::protobuf::types::ProtobufTypeString,
+            ::protobuf::types::ProtobufTypeMessage<Service>,
+        >(1, &self.services, os)?;
         os.write_unknown_fields(self.get_unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -1993,9 +2260,11 @@ impl ::protobuf::Message for ServicesResponse {
     fn as_any(&self) -> &dyn (::std::any::Any) {
         self as &dyn (::std::any::Any)
     }
+
     fn as_any_mut(&mut self) -> &mut dyn (::std::any::Any) {
         self as &mut dyn (::std::any::Any)
     }
+
     fn into_any(self: ::std::boxed::Box<Self>) -> ::std::boxed::Box<dyn (::std::any::Any)> {
         self
     }
@@ -2009,18 +2278,23 @@ impl ::protobuf::Message for ServicesResponse {
     }
 
     fn descriptor_static() -> &'static ::protobuf::reflect::MessageDescriptor {
-        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::LazyV2::INIT;
+        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> =
+            ::protobuf::rt::LazyV2::INIT;
         descriptor.get(|| {
             let mut fields = ::std::vec::Vec::new();
-            fields.push(::protobuf::reflect::accessor::make_map_accessor::<_, ::protobuf::types::ProtobufTypeString, ::protobuf::types::ProtobufTypeMessage<Service>>(
+            fields.push(::protobuf::reflect::accessor::make_map_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeString,
+                ::protobuf::types::ProtobufTypeMessage<Service>,
+            >(
                 "services",
-                |m: &ServicesResponse| { &m.services },
-                |m: &mut ServicesResponse| { &mut m.services },
+                |m: &ServicesResponse| &m.services,
+                |m: &mut ServicesResponse| &mut m.services,
             ));
             ::protobuf::reflect::MessageDescriptor::new_pb_name::<ServicesResponse>(
                 "ServicesResponse",
                 fields,
-                file_descriptor_proto()
+                file_descriptor_proto(),
             )
         })
     }
@@ -2050,7 +2324,7 @@ impl ::protobuf::reflect::ProtobufValue for ServicesResponse {
     }
 }
 
-#[derive(PartialEq,Clone,Default)]
+#[derive(PartialEq, Clone, Default)]
 #[cfg_attr(feature = "with-serde", derive(Serialize, Deserialize))]
 pub struct Plugin {
     // message fields
@@ -2081,6 +2355,7 @@ impl Plugin {
     pub fn get_name(&self) -> &str {
         &self.name
     }
+
     pub fn clear_name(&mut self) {
         self.name.clear();
     }
@@ -2107,6 +2382,7 @@ impl Plugin {
     pub fn get_url(&self) -> &str {
         &self.url
     }
+
     pub fn clear_url(&mut self) {
         self.url.clear();
     }
@@ -2133,6 +2409,7 @@ impl Plugin {
     pub fn get_icon(&self) -> &str {
         &self.icon
     }
+
     pub fn clear_icon(&mut self) {
         self.icon.clear();
     }
@@ -2165,16 +2442,21 @@ impl ::protobuf::Message for Plugin {
             match field_number {
                 1 => {
                     ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.name)?;
-                },
+                }
                 2 => {
                     ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.url)?;
-                },
+                }
                 3 => {
                     ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.icon)?;
-                },
+                }
                 _ => {
-                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
-                },
+                    ::protobuf::rt::read_unknown_or_skip_group(
+                        field_number,
+                        wire_type,
+                        is,
+                        self.mut_unknown_fields(),
+                    )?;
+                }
             };
         }
         ::std::result::Result::Ok(())
@@ -2198,7 +2480,10 @@ impl ::protobuf::Message for Plugin {
         my_size
     }
 
-    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::ProtobufResult<()> {
+    fn write_to_with_cached_sizes(
+        &self,
+        os: &mut ::protobuf::CodedOutputStream<'_>,
+    ) -> ::protobuf::ProtobufResult<()> {
         if !self.name.is_empty() {
             os.write_string(1, &self.name)?;
         }
@@ -2227,9 +2512,11 @@ impl ::protobuf::Message for Plugin {
     fn as_any(&self) -> &dyn (::std::any::Any) {
         self as &dyn (::std::any::Any)
     }
+
     fn as_any_mut(&mut self) -> &mut dyn (::std::any::Any) {
         self as &mut dyn (::std::any::Any)
     }
+
     fn into_any(self: ::std::boxed::Box<Self>) -> ::std::boxed::Box<dyn (::std::any::Any)> {
         self
     }
@@ -2243,28 +2530,32 @@ impl ::protobuf::Message for Plugin {
     }
 
     fn descriptor_static() -> &'static ::protobuf::reflect::MessageDescriptor {
-        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::LazyV2::INIT;
+        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> =
+            ::protobuf::rt::LazyV2::INIT;
         descriptor.get(|| {
             let mut fields = ::std::vec::Vec::new();
-            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
-                "name",
-                |m: &Plugin| { &m.name },
-                |m: &mut Plugin| { &mut m.name },
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeString,
+            >(
+                "name", |m: &Plugin| &m.name, |m: &mut Plugin| &mut m.name
             ));
-            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
-                "url",
-                |m: &Plugin| { &m.url },
-                |m: &mut Plugin| { &mut m.url },
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeString,
+            >(
+                "url", |m: &Plugin| &m.url, |m: &mut Plugin| &mut m.url
             ));
-            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
-                "icon",
-                |m: &Plugin| { &m.icon },
-                |m: &mut Plugin| { &mut m.icon },
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<
+                _,
+                ::protobuf::types::ProtobufTypeString,
+            >(
+                "icon", |m: &Plugin| &m.icon, |m: &mut Plugin| &mut m.icon
             ));
             ::protobuf::reflect::MessageDescriptor::new_pb_name::<Plugin>(
                 "Plugin",
                 fields,
-                file_descriptor_proto()
+                file_descriptor_proto(),
             )
         })
     }
@@ -2344,14 +2635,13 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     \x05hubpb\xa2\x02\x03HXX\xaa\x02\x03Hub\xca\x02\x03Hubb\x06proto3\
 ";
 
-static file_descriptor_proto_lazy: ::protobuf::rt::LazyV2<::protobuf::descriptor::FileDescriptorProto> = ::protobuf::rt::LazyV2::INIT;
+static file_descriptor_proto_lazy: ::protobuf::rt::LazyV2<::protobuf::descriptor::FileDescriptorProto> =
+    ::protobuf::rt::LazyV2::INIT;
 
 fn parse_descriptor_proto() -> ::protobuf::descriptor::FileDescriptorProto {
     ::protobuf::parse_from_bytes(file_descriptor_proto_data).unwrap()
 }
 
 pub fn file_descriptor_proto() -> &'static ::protobuf::descriptor::FileDescriptorProto {
-    file_descriptor_proto_lazy.get(|| {
-        parse_descriptor_proto()
-    })
+    file_descriptor_proto_lazy.get(|| parse_descriptor_proto())
 }

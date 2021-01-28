@@ -116,6 +116,9 @@ pub struct Kong {
 
     pub babylon_request_id: bool,
     pub w3c_trace_context: bool,
+
+    pub ip_rate_limits: Option<KongRateLimit>,
+    pub user_rate_limits: Option<KongRateLimit>,
 }
 
 fn preserve_host_default() -> bool {
@@ -144,6 +147,14 @@ pub struct BabylonAuthHeader {
     pub cache_timeout_sec: u32,
     pub enabled: bool,
     pub http_timeout_msec: u32,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, Default)]
+pub struct KongRateLimit {
+    pub per_second: Option<u32>,
+    pub per_minute: Option<u32>,
+    pub per_hour: Option<u32>,
+    pub per_day: Option<u32>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]

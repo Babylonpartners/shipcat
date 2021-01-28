@@ -295,6 +295,48 @@ impl Default for W3CTraceContextPluginConfig {
     }
 }
 
+#[derive(Serialize, Debug, Clone)]
+pub struct UserRateLimitPluginConfig {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub minute: Option<u32>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub hour: Option<u32>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub day: Option<u32>,
+    pub policy: String,
+    pub fault_tolerant: bool,
+    pub hide_client_headers: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub redis_host: Option<String>,
+    pub redis_port: u32,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub redis_password: Option<String>,
+    pub redis_timeout: u32,
+    pub redis_database: u32,
+}
+
+// https://github.com/Kong/kong/blob/4973a6237b108f0b332ca97b187faf669f2497dd/kong/plugins/rate-limiting/schema.lua#L7-L21
+#[derive(Serialize, Debug, Clone)]
+pub struct RateLimitingPluginConfig {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub minute: Option<u32>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub hour: Option<u32>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub day: Option<u32>,
+    pub limit_by: String,
+    pub policy: String,
+    pub fault_tolerant: bool,
+    pub hide_client_headers: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub redis_host: Option<String>,
+    pub redis_port: u32,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub redis_password: Option<String>,
+    pub redis_timeout: u32,
+    pub redis_database: u32,
+}
+
 #[allow(clippy::large_enum_variant)] // variants all reasonably similar
 #[derive(Serialize, Debug, Clone)]
 #[serde(tag = "name", rename_all = "kebab-case")]
@@ -312,6 +354,8 @@ pub enum ApiPlugin {
     JsonCookiesCsrf(PluginBase<JsonCookiesCsrfPluginConfig>),
     ResponseTransformer(PluginBase<ResponseTransformerPluginConfig>),
     RequestTransformer(PluginBase<RequestTransformerPluginConfig>),
+    RateLimiting(PluginBase<RateLimitingPluginConfig>),
+    UserRateLimit(PluginBase<UserRateLimitPluginConfig>),
 }
 
 #[derive(Serialize, Debug, Clone)]
@@ -427,6 +471,45 @@ pub fn kongfig_apis(from: BTreeMap<String, Kong>, config: KongConfig, region: &R
             }));
             plugins.push(ApiPlugin::JwtValidator(PluginBase::removed()));
         }
+
+        plugins.push(ApiPlugin::RateLimiting(if let Some(limits) = v.ip_rate_limits {
+            PluginBase::new(RateLimitingPluginConfig {
+                minute: limits.per_minute,
+                hour: limits.per_hour,
+                day: limits.per_day,
+                limit_by: "ip".to_string(),
+                policy: "cluster".to_string(),
+                fault_tolerant: true,
+                hide_client_headers: true,
+                redis_host: None,
+                redis_port: 6379,
+                redis_password: None,
+                redis_timeout: 2000,
+                redis_database: 0,
+            })
+        } else {
+            PluginBase::removed()
+        }));
+
+        plugins.push(ApiPlugin::UserRateLimit(
+            if let Some(limits) = v.user_rate_limits {
+                PluginBase::new(UserRateLimitPluginConfig {
+                    minute: limits.per_minute,
+                    hour: limits.per_hour,
+                    day: limits.per_day,
+                    policy: "cluster".to_string(),
+                    fault_tolerant: true,
+                    hide_client_headers: true,
+                    redis_host: None,
+                    redis_port: 6379,
+                    redis_password: None,
+                    redis_timeout: 2000,
+                    redis_database: 0,
+                })
+            } else {
+                PluginBase::removed()
+            },
+        ));
 
         // Babylon Auth Header plugin
         // TODO: Remove plugin if not enabled/None
