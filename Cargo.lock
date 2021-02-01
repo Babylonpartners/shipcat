@@ -1507,11 +1507,11 @@ checksum = "88579771288728879b57485cc7d6b07d648c9f0141eb955f8ab7f9d45394468e"
 
 [[package]]
 name = "merge"
-version = "0.159.3"
+version = "0.159.4"
 
 [[package]]
 name = "merge_derive"
-version = "0.159.3"
+version = "0.159.4"
 dependencies = [
  "proc-macro2 0.4.30",
  "quote 0.6.13",
@@ -2110,7 +2110,7 @@ dependencies = [
 
 [[package]]
 name = "raftcat"
-version = "0.159.3"
+version = "0.159.4"
 dependencies = [
  "actix-files",
  "actix-rt",
@@ -2577,7 +2577,7 @@ checksum = "2579985fda508104f7587689507983eadd6a6e84dd35d6d115361f530916fa0d"
 
 [[package]]
 name = "shipcat"
-version = "0.159.3"
+version = "0.159.4"
 dependencies = [
  "chrono",
  "clap",
@@ -2615,7 +2615,7 @@ dependencies = [
 
 [[package]]
 name = "shipcat_definitions"
-version = "0.159.3"
+version = "0.159.4"
 dependencies = [
  "Inflector",
  "base64 0.9.3",
@@ -2643,7 +2643,7 @@ dependencies = [
 
 [[package]]
 name = "shipcat_filebacked"
-version = "0.159.3"
+version = "0.159.4"
 dependencies = [
  "error-chain",
  "log",

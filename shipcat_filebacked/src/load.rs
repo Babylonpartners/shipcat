@@ -34,9 +34,10 @@ impl ManifestSource {
             bail!("Service folder {} does not exist", dir.display())
         }
 
+        let builtin_defaults = ManifestDefaults::builtin();
         let global_defaults = ManifestDefaults::from_global(conf)?;
         let regional_defaults = ManifestDefaults::from_region(reg)?;
-        let defaults = global_defaults.merge(regional_defaults);
+        let defaults = builtin_defaults.merge(global_defaults.merge(regional_defaults));
 
         let source_path = Self::services_dir().join(service).join("manifest.yml");
         debug!("Loading service manifest from {:?}", source_path);
@@ -115,6 +116,13 @@ impl ManifestSource {
 }
 
 impl ManifestDefaults {
+    fn builtin() -> Self {
+        let mut defaults = Self::default();
+        defaults.kong_apis.defaults.ip_rate_limits.enabled = Some(false);
+        defaults.kong_apis.defaults.user_rate_limits.enabled = Some(false);
+        defaults
+    }
+
     fn from_global(conf: &Config) -> Result<Self> {
         match serde_yaml::from_value(conf.defaults.clone()) {
             Err(e) => bail!("Global defaults did not parse as YAML: {}", e),
