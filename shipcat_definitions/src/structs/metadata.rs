@@ -203,12 +203,12 @@ pub struct Metadata {
     /// Link to the release plan for this service
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub releasePlan: Option<String>,
-    /// Document ID of the threat models for this service
+    /// Document IDs of the threat models for this service
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub threatModel: Vec<String>,
-    /// Link to the DPSIA for this service
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub dpsia: Option<String>,
+    /// Link to any DPSIAs for this service
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub dpsia: Vec<String>,
 
     // TODO: generate swagger docs url from region and service name
     /// Custom metadata, keys defined in the Config

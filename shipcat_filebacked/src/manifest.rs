@@ -65,10 +65,8 @@ pub struct MetadataSource {
     pub ped: Option<String>,
     pub testPlan: Option<String>,
     pub releasePlan: Option<String>,
-
     pub threatModel: OneOrMany<String>,
-
-    pub dpsia: Option<String>,
+    pub dpsia: OneOrMany<String>,
 
     // TODO: generate swagger docs url from region and service name
     /// Custom metadata, keys defined in the Config
@@ -221,8 +219,7 @@ impl ManifestSource {
                 .unwrap_or_default()
                 .build(&container_build_params)?,
             sidecars: overrides
-                .sidecars
-                .unwrap_or_default()
+                .sidecars .unwrap_or_default()
                 .build(&container_build_params)?,
             readinessProbe: overrides.readiness_probe,
             livenessProbe: overrides.liveness_probe,
@@ -328,7 +325,6 @@ impl ManifestSource {
         }
     }
 
-    // TODO: Extract MetadataSource
     fn build_metadata(&self, conf: &Config) -> Result<Metadata> {
         let name = self.name.as_ref().expect("manifest name");
         let mut md = self.metadata.clone().require("metadata")?;
@@ -382,7 +378,10 @@ impl ManifestSource {
                 OneOrMany::One(x)   => vec![x],
                 OneOrMany::Many(xs) => xs,
             },
-            dpsia: md.dpsia,
+            dpsia: match md.dpsia {
+                OneOrMany::One(x)   => vec![x],
+                OneOrMany::Many(xs) => xs,
+            },
             custom: md.custom,
         })
     }
