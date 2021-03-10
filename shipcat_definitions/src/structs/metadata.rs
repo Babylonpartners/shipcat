@@ -193,12 +193,29 @@ pub struct Metadata {
     /// Canoncal documentation link
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub docs: Option<String>,
+
+    /// Link to the Product Engineering Document for the service
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub ped: Option<String>,
+    /// Link to the test plan for this service
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub testPlan: Option<String>,
+    /// Link to the release plan for this service
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub releasePlan: Option<String>,
+    /// Document ID of the threat models for this service
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub threatModel: Vec<String>,
+    /// Link to the DPSIA for this service
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub dpsia: Option<String>,
+
     // TODO: generate swagger docs url from region and service name
     /// Custom metadata, keys defined in the Config
     #[serde(flatten)]
     pub custom: BTreeMap<String, String>,
 }
-fn default_format_string() -> String {
+pub fn default_format_string() -> String {
     "{{ version }}".into()
 }
 

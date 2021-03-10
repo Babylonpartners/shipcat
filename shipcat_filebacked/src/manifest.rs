@@ -1,3 +1,5 @@
+#![allow(non_snake_case)]
+
 use merge::Merge;
 use std::collections::BTreeMap;
 
@@ -7,6 +9,8 @@ use shipcat_definitions::{
         ConfigMap, Dependency, DestinationRule, EventStream, Gate, HealthCheck, HostAlias, Kafka,
         KafkaResources, LifeCycle, Metadata, NotificationMode, PersistentVolume, Probe, PrometheusAlert,
         Rbac, RollingUpdate, SecurityContext, VaultOpts, VolumeMount,
+        metadata::Context, metadata::SlackChannel, metadata::Language, metadata::Contact,
+        metadata::default_format_string,
     },
     BaseManifest, Config, Manifest, PrimaryWorkload, Region, Result,
 };
@@ -23,6 +27,55 @@ use super::{
     SimpleManifest,
 };
 
+/// Helper for optional string/list of string structs
+#[derive(Deserialize, Clone)]
+#[serde(untagged)]
+pub enum OneOrMany<T> {
+    One(T),
+    Many(Vec<T>),
+}
+
+impl Default for OneOrMany<String> {
+    fn default() -> OneOrMany<String> {
+        OneOrMany::Many(vec![])
+    }
+}
+
+#[derive(Deserialize, Default, Clone)]
+#[serde(default)]
+pub struct MetadataSource {
+    pub repo: String,
+    pub team: String,
+    pub context: Option<Context>,
+    #[serde(skip_deserializing)]
+    pub squad: Option<String>,
+    #[serde(skip_deserializing)]
+    pub tribe: Option<String>,
+    pub language: Option<Language>,
+    #[serde(default = "default_format_string")]
+    pub gitTagTemplate: String,
+    pub contacts: Vec<Contact>,
+    pub maintainers: Vec<String>,
+    pub support: Option<SlackChannel>,
+    pub notifications: Option<SlackChannel>,
+    pub runbook: Option<String>,
+    pub description: Option<String>,
+    pub docs: Option<String>,
+
+    pub ped: Option<String>,
+    pub testPlan: Option<String>,
+    pub releasePlan: Option<String>,
+
+    pub threatModel: OneOrMany<String>,
+
+    pub dpsia: Option<String>,
+
+    // TODO: generate swagger docs url from region and service name
+    /// Custom metadata, keys defined in the Config
+    #[serde(flatten)]
+    pub custom: BTreeMap<String, String>,
+}
+
 /// Main manifest, deserialized from `manifest.yml`
 #[derive(Deserialize, Default)]
 #[serde(default, rename_all = "camelCase")]
@@ -31,7 +84,7 @@ pub struct ManifestSource {
     pub external: bool,
     pub disabled: bool,
     pub regions: Vec<String>,
-    pub metadata: Option<Metadata>,
+    pub metadata: Option<MetadataSource>,
 
     #[serde(flatten)]
     pub overrides: ManifestOverrides,
@@ -307,7 +360,31 @@ impl ManifestSource {
             bail!("Need a notification and support channel for {}", md.team);
         }
 
-        Ok(md)
+        Ok(Metadata {
+            repo: md.repo,
+            team: md.team,
+            context: md.context,
+            squad: md.squad,
+            tribe: md.tribe,
+            language: md.language,
+            gitTagTemplate: md.gitTagTemplate,
+            contacts: md.contacts,
+            maintainers: md.maintainers,
+            support: md.support,
+            notifications: md.notifications,
+            runbook: md.runbook,
+            description: md.description,
+            docs: md.docs,
+            ped: md.ped,
+            testPlan: md.testPlan,
+            releasePlan: md.releasePlan,
+            threatModel: match md.threatModel {
+                OneOrMany::One(x)   => vec![x],
+                OneOrMany::Many(xs) => xs,
+            },
+            dpsia: md.dpsia,
+            custom: md.custom,
+        })
     }
 
     // TODO: Extract DataHandlingSource
