@@ -130,8 +130,8 @@ async fn get_codeowners() {
     let conf = Config::read().await.unwrap();
     let cos = get::codeowners(&conf).await.unwrap();
 
-    assert_eq!(cos.len(), 4); // serivces with team admins get a listing
-    assert_eq!(cos[1], "services/fake-ask/* @babylonhealth/o11y @clux");
+    assert_eq!(cos.len(), 4); // services with team admins get a listing
+    assert_eq!(cos[1], "/services/fake-ask/ @babylonhealth/o11y @clux");
 }
 
 #[tokio::test]
