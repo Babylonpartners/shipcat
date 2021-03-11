@@ -70,7 +70,7 @@ pub async fn codeowners(conf: &Config) -> Result<Vec<String>> {
         }
 
         if !ghids.is_empty() {
-            output.push(format!("services/{}/* {}", mf.name, ghids.join(" ")));
+            output.push(format!("/services/{}/ {}", mf.name, ghids.join(" ")));
         }
     }
     println!("{}", output.join("\n"));
