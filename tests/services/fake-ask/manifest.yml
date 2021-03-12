@@ -21,8 +21,8 @@ metadata:
   repo: https://github.com/babylonhealth/shipcat
   gitTagTemplate: "prefix-{{ version }}-suffix"
   extraDocumentation: http://example.com
-  dpsia: "FOO.BAR.123"
-  threatModel:
+  threatModel: "FOO.BAR.123"
+  dpsia:
   - "https://foo.com"
   - "https://bar.com"
 sidecars:
