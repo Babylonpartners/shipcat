@@ -10,7 +10,6 @@ struct GdprOutput {
     pub services: Vec<String>,
 }
 
-
 /// Show GDPR related info for a service
 ///
 /// Prints the cascaded structs from a manifests `dataHandling`

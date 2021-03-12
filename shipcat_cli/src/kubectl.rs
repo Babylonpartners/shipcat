@@ -140,7 +140,6 @@ pub async fn use_context(context: &str) -> Result<String> {
     Ok(res)
 }
 
-
 /// Shell into a pod associated with a workload
 pub async fn shell(mf: &Manifest, cmd: Option<Vec<&str>>) -> Result<()> {
     // TODO: kubectl auth can-i create pods/exec
@@ -185,7 +184,6 @@ pub async fn shell(mf: &Manifest, cmd: Option<Vec<&str>>) -> Result<()> {
     kexec(execargs).await?;
     Ok(())
 }
-
 
 /// Port forward a port to localhost
 ///
@@ -243,7 +241,6 @@ pub async fn port_forward(mf: &Manifest) -> Result<()> {
     kexec(pfargs).await?;
     Ok(())
 }
-
 
 /// Apply the kube object an applyable file
 ///

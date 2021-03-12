@@ -220,7 +220,6 @@ async fn crd_reconcile(
         })
         .buffer_unordered(n_workers);
 
-
     let mut errs = vec![];
     while let Some(r) = buffered.next().await {
         if let Err(e) = r {

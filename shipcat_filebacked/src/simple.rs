@@ -2,7 +2,6 @@ use std::fmt;
 
 use shipcat_definitions::{structs::Kong, BaseManifest};
 
-
 /// Simplified Manifest for a specific region (no templating/config files loaded).
 pub struct SimpleManifest {
     pub base: BaseManifest,

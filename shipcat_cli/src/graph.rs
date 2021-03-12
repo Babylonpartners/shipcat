@@ -50,14 +50,12 @@ impl DepEdge {
     }
 }
 
-
 /// Graph of simplified manifests with dependencies as edges
 ///
 /// This is fully serializable because it is created with `petgraph` using the serde
 /// featurset. We use that to serialize the graph as yaml.
 /// We can also convert this to `graphviz` format via some of the `petgraph` helpers.
 pub type CatGraph = DiGraph<ManifestNode, DepEdge>;
-
 
 /// Helper function that should be an impl on CatGraph
 /// Left public for tests

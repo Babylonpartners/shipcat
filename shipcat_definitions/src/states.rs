@@ -118,7 +118,6 @@ impl Manifest {
     }
 }
 
-
 /// Various states a Config can exist in depending on resolution.
 ///
 /// Within shipcat, this is used to optimize speed of accessors.

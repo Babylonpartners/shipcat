@@ -70,14 +70,12 @@ fn default_host() -> String {
     "*".into()
 }
 
-
 #[derive(Default, Serialize, Deserialize, Clone, Debug)]
 #[serde(deny_unknown_fields)]
 pub struct KafkaUsers {
     pub name: String,
     pub acls: Vec<AclDefinition>,
 }
-
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -154,7 +152,6 @@ impl KafkaResources {
 #[cfg(test)]
 mod tests {
     use super::KafkaResources;
-
 
     fn validKafkaResource(input: &str) -> KafkaResources {
         let kr: KafkaResources = serde_yaml::from_str(input).unwrap();

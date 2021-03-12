@@ -95,7 +95,6 @@ pub async fn apply(
     }
 }
 
-
 /// Reason for an apply being allowed through
 ///
 /// Some of these imply others. We pick the strongest one we can.

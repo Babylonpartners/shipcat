@@ -151,7 +151,6 @@ impl Manifest {
     }
 }
 
-
 #[cfg(test)]
 mod tests {
     use super::Manifest;

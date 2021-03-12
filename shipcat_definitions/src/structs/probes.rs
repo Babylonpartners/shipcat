@@ -1,6 +1,5 @@
 use super::Result;
 
-
 #[derive(Serialize, Deserialize, Clone, Default, Debug)]
 #[cfg_attr(feature = "filesystem", serde(deny_unknown_fields))]
 pub struct HttpGet {
@@ -24,14 +23,12 @@ pub struct HttpHeader {
     pub value: String,
 }
 
-
 #[derive(Serialize, Deserialize, Clone, Default, Debug)]
 #[cfg_attr(feature = "filesystem", serde(deny_unknown_fields))]
 pub struct Exec {
     /// Command to execute in the container
     pub command: Vec<String>,
 }
-
 
 #[derive(Serialize, Deserialize, Clone, Default, Debug)]
 #[cfg_attr(feature = "filesystem", serde(deny_unknown_fields))]
@@ -94,7 +91,6 @@ fn failure_threshold_default() -> u32 {
 fn timeout_seconds_default() -> u32 {
     1
 }
-
 
 impl Probe {
     pub fn verify(&self) -> Result<()> {

@@ -46,7 +46,6 @@ fn default_api_version() -> String {
     "v1".into()
 }
 
-
 impl Dependency {
     pub fn verify(&self) -> Result<()> {
         // self.name must exist in services/

@@ -62,7 +62,6 @@ pub fn one_off(tpl: &str, ctx: &Context) -> Result<String> {
     Ok(res)
 }
 
-
 // main helpers for the manifest
 use super::{Manifest, Region};
 impl Manifest {
@@ -125,7 +124,6 @@ impl EnvVars {
         Ok(())
     }
 }
-
 
 /// Read an arbitrary template from manifests/{folder}/{name}.j2
 #[cfg(feature = "filesystem")]

@@ -59,7 +59,6 @@ impl GithubRelease {
     }
 }
 
-
 // Fetch the first page of releases from a release page
 async fn fetch_latest_releases(client: &Client, url: &str) -> Result<Vec<GithubRelease>> {
     debug!("Finding latest releases: {}", url);
@@ -81,7 +80,6 @@ async fn fetch_latest_releases(client: &Client, url: &str) -> Result<Vec<GithubR
         .filter(|r| !r.assets.is_empty())
         .collect::<Vec<_>>())
 }
-
 
 /// Attempt to upgrade shipcat
 pub async fn self_upgrade(ver: Option<Version>) -> Result<()> {
@@ -161,7 +159,6 @@ pub async fn self_upgrade(ver: Option<Version>) -> Result<()> {
     Ok(())
 }
 
-
 /// Download the file behind the given `url` into the specified `dest`.
 ///
 /// Presents a progressbar via indicatif when content-length is returned
@@ -209,7 +206,6 @@ async fn download_tarball(client: &Client, url: &str, mut dest: File) -> Result<
     }
     Ok(())
 }
-
 
 use std::io::{Read, Seek, SeekFrom};
 // A generic progress-bar reader to slap between readers

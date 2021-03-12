@@ -50,7 +50,6 @@ pub struct DumbMessage {
     pub color: Option<String>,
 }
 
-
 pub fn env_hook_url() -> Result<String> {
     env::var("SLACK_SHIPCAT_HOOK_URL").map_err(|_| ErrorKind::MissingSlackUrl.into())
 }

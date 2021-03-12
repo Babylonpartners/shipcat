@@ -81,7 +81,6 @@ where
     }
 }
 
-
 impl<K, V> Merge for EnabledMap<K, V>
 where
     K: Clone + std::hash::Hash + Ord,
@@ -100,7 +99,6 @@ where
         Self(merged)
     }
 }
-
 
 #[cfg(test)]
 mod tests {

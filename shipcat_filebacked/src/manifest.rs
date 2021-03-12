@@ -5,12 +5,14 @@ use std::collections::BTreeMap;
 
 use shipcat_definitions::{
     structs::{
-        autoscaling::AutoScaling, security::DataHandling, tolerations::Tolerations, volume::Volume,
+        autoscaling::AutoScaling,
+        metadata::{default_format_string, Contact, Context, Language, SlackChannel},
+        security::DataHandling,
+        tolerations::Tolerations,
+        volume::Volume,
         ConfigMap, Dependency, DestinationRule, EventStream, Gate, HealthCheck, HostAlias, Kafka,
         KafkaResources, LifeCycle, Metadata, NotificationMode, PersistentVolume, Probe, PrometheusAlert,
         Rbac, RollingUpdate, SecurityContext, VaultOpts, VolumeMount,
-        metadata::Context, metadata::SlackChannel, metadata::Language, metadata::Contact,
-        metadata::default_format_string,
     },
     BaseManifest, Config, Manifest, PrimaryWorkload, Region, Result,
 };
@@ -219,7 +221,8 @@ impl ManifestSource {
                 .unwrap_or_default()
                 .build(&container_build_params)?,
             sidecars: overrides
-                .sidecars .unwrap_or_default()
+                .sidecars
+                .unwrap_or_default()
                 .build(&container_build_params)?,
             readinessProbe: overrides.readiness_probe,
             livenessProbe: overrides.liveness_probe,
@@ -375,11 +378,11 @@ impl ManifestSource {
             testPlan: md.testPlan,
             releasePlan: md.releasePlan,
             threatModel: match md.threatModel {
-                OneOrMany::One(x)   => vec![x],
+                OneOrMany::One(x) => vec![x],
                 OneOrMany::Many(xs) => xs,
             },
             dpsia: match md.dpsia {
-                OneOrMany::One(x)   => vec![x],
+                OneOrMany::One(x) => vec![x],
                 OneOrMany::Many(xs) => xs,
             },
             custom: md.custom,

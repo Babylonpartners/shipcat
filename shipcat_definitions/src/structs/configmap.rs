@@ -32,7 +32,6 @@ pub struct ConfigMappedFile {
     pub value: Option<String>,
 }
 
-
 impl ConfigMap {
     pub fn verify(&self) -> Result<()> {
         // mount paths can't be empty string

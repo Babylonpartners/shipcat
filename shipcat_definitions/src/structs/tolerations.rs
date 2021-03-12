@@ -39,7 +39,6 @@ pub struct Tolerations {
     tolerationSeconds: Option<u32>,
 }
 
-
 impl Tolerations {
     pub fn verify(&self) -> Result<()> {
         match self.operator {

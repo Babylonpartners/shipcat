@@ -80,7 +80,6 @@ async fn verify_region(r: String) -> Result<()> {
     Ok(())
 }
 
-
 /// Validate all manifests in a service directory for ALL regions
 ///
 /// This is meant to replace a for loop over shipcat list-regions

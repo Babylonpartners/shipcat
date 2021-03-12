@@ -246,9 +246,8 @@ impl Metadata {
 }
 
 impl Metadata {
-
     fn verify_hyperlink(&self, link: &String, name: &str) -> Result<()> {
-        if !link.starts_with("http"){
+        if !link.starts_with("http") {
             bail!("{} must be a hyperlink (found {})", name, link.clone());
         }
         Ok(())
@@ -320,8 +319,8 @@ impl Metadata {
 #[cfg(test)]
 mod tests {
     use super::{default_format_string, Metadata, SlackChannel};
-    use crate::teams::{Owners, Squad, SlackSet, GithubTeams};
-    use std::collections::{BTreeSet, BTreeMap};
+    use crate::teams::{GithubTeams, Owners, SlackSet, Squad};
+    use std::collections::{BTreeMap, BTreeSet};
 
     fn default_metadata() -> Metadata {
         Metadata {

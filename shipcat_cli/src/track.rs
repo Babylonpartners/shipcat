@@ -463,7 +463,6 @@ pub async fn workload_rollout(mf: &Manifest, kube: &ShipKube) -> Result<bool> {
         }
     }
 
-
     // TODO: create progress bar above this fn so we can use MultiProgressBar in cluster.rs
     let pb = ProgressBar::new(minimum.into());
     pb.set_style(

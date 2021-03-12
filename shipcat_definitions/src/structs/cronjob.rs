@@ -9,7 +9,6 @@ pub struct JobVolumeClaim {
     pub mountPath: String,
 }
 
-
 #[derive(Serialize, Deserialize, Debug, Clone, Default)]
 pub struct CronJob {
     /// Common properties for all types of container

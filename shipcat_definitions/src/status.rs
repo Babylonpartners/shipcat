@@ -204,7 +204,6 @@ impl Condition {
     }
 }
 
-
 #[cfg(test)]
 mod tests {
     use super::{Applier, Condition};
@@ -227,7 +226,6 @@ mod tests {
         assert!(encoded.contains("lastTransitionTime: \"1996-12-19T16:39:57+00:00\""));
     }
 }
-
 
 #[derive(Deserialize, Serialize, Clone, Debug, Default)]
 pub struct Applier {

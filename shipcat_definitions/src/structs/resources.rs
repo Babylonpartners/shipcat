@@ -143,7 +143,6 @@ impl ResourceRequirements<String> {
     }
 }
 
-
 /// Parse normal k8s memory/disk resource value into floats
 ///
 /// Note that kubernetes insists on using upper case K for kilo against SI conventions:

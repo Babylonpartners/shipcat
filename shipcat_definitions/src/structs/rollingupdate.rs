@@ -85,7 +85,6 @@ impl Default for RollingUpdate {
     }
 }
 
-
 impl RollingUpdate {
     pub fn verify(&self, replicas: u32) -> Result<()> {
         if self.maxUnavailable.is_none() && self.maxSurge.is_none() {
@@ -100,7 +99,6 @@ impl RollingUpdate {
         Ok(())
     }
 }
-
 
 impl RollingUpdate {
     /// Estimate how many cycles is needed to roll out a new version
@@ -163,7 +161,6 @@ impl RollingUpdate {
         ((f64::from(replicas) * 25.0) / 100.0).ceil() as u32
     }
 }
-
 
 #[cfg(test)]
 mod tests {

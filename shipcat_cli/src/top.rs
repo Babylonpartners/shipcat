@@ -120,7 +120,6 @@ pub async fn world_requests(
     Ok(mfs)
 }
 
-
 /// Resource top for a single region
 ///
 /// This presents an analytical solution to aggregate resource requests in a region.
@@ -365,7 +364,6 @@ pub async fn world_tribe_requests(
     let sorted = sort_and_print_team_resources(team_requests, "tribe", order, fmt, ub)?;
     Ok(sorted)
 }
-
 
 fn sort_and_print_team_resources(
     mut reqs: Vec<(String, ResourceTotals)>,

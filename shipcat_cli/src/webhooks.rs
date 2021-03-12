@@ -40,7 +40,6 @@ pub async fn reconcile_event(us: UpgradeState, reg: &Region) {
     }
 }
 
-
 /// Throw events to configured webhooks
 pub async fn apply_event(us: UpgradeState, info: &UpgradeInfo, reg: &Region, conf: &Config) {
     debug!("Apply event: {:?}", info);

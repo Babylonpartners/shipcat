@@ -216,7 +216,6 @@ async fn templating_test() {
     assert!(cfgtpl.contains("CLIENT_ID=FAKEASKID"));
 }
 
-
 #[tokio::test]
 async fn vault_policy_test() {
     setup();

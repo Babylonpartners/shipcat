@@ -140,7 +140,6 @@ pub mod get;
 pub mod top;
 pub use top::{OutputFormat, ResourceOrder};
 
-
 /// Diffing module for values
 pub mod diff;
 
