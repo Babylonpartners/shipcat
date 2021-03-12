@@ -246,18 +246,21 @@ impl Metadata {
 }
 
 impl Metadata {
+
     fn verify_hyperlink(&self, link: &String, name: &str) -> Result<()> {
         if !link.starts_with("http"){
             bail!("{} must be a hyperlink (found {})", name, link.clone());
         }
         Ok(())
     }
+
     fn verify_optional_hyperlink(&self, field: &Option<String>, name: &str) -> Result<()> {
         if let Some(f) = field {
             self.verify_hyperlink(f, name)?;
         };
         Ok(())
     }
+
     pub fn verify(&self, owners: &Owners, allowedCustomMetadata: &BTreeSet<String>) -> Result<()> {
         if !owners.squads.contains_key(&self.team) {
             bail!("Team name {} does not match a squad in teams.yml", self.team);
