@@ -246,6 +246,18 @@ impl Metadata {
 }
 
 impl Metadata {
+    fn verify_hyperlink(&self, link: &String, name: &str) -> Result<()> {
+        if !link.starts_with("http"){
+            bail!("{} must be a hyperlink (found {})", name, link.clone());
+        }
+        Ok(())
+    }
+    fn verify_optional_hyperlink(&self, field: &Option<String>, name: &str) -> Result<()> {
+        if let Some(f) = field {
+            self.verify_hyperlink(f, name)?;
+        };
+        Ok(())
+    }
     pub fn verify(&self, owners: &Owners, allowedCustomMetadata: &BTreeSet<String>) -> Result<()> {
         if !owners.squads.contains_key(&self.team) {
             bail!("Team name {} does not match a squad in teams.yml", self.team);
@@ -278,11 +290,21 @@ impl Metadata {
         if let Some(channel) = &self.notifications {
             channel.verify()?;
         }
-        if let Some(runbook) = &self.runbook {
-            if !runbook.ends_with(".md") && !runbook.ends_with(".rt") && !runbook.ends_with(".org") {
-                bail!("Runbook must be a file in the service repo with a valid extension (.md / .rt / .org)");
+
+        // Document field formats
+        self.verify_optional_hyperlink(&self.ped, "ped")?;
+        self.verify_optional_hyperlink(&self.testPlan, "testPlan")?;
+        self.verify_optional_hyperlink(&self.releasePlan, "releasePlan")?;
+        let tmre = Regex::new(r"^[A-Z]{3,4}\.[A-Z]{3,4}\.\d{3,5}$").unwrap();
+        for tm in &self.threatModel {
+            if !tmre.is_match(&tm) {
+                bail!("Threat models must be a document number of the form XXX.YYYY.12345");
             }
         }
+        for dpsia in &self.dpsia {
+            self.verify_hyperlink(&dpsia, "dpsia")?;
+        }
+
         for k in self.custom.keys() {
             if !allowedCustomMetadata.contains(k) {
                 bail!("{} is not an allowed metadata property", k);
@@ -295,6 +317,44 @@ impl Metadata {
 #[cfg(test)]
 mod tests {
     use super::{default_format_string, Metadata, SlackChannel};
+    use crate::teams::{Owners, Squad, SlackSet, GithubTeams};
+    use std::collections::{BTreeSet, BTreeMap};
+
+    fn default_metadata() -> Metadata {
+        Metadata {
+            team: "foo".to_string(),
+            gitTagTemplate: "{{ version }}".to_string(),
+            ..Default::default()
+        }
+    }
+
+    fn default_allowed_custom() -> BTreeSet<String> {
+        BTreeSet::new()
+    }
+
+    fn default_owners() -> Owners {
+        let mut owners = Owners {
+            people: BTreeMap::new(),
+            squads: BTreeMap::new(),
+            tribes: BTreeMap::new(),
+        };
+        owners.squads.insert("foo".to_string(), Squad {
+            name: "foo".to_string(),
+            members: vec![],
+            owners: vec![],
+            github: GithubTeams {
+                team: "foo".to_string(),
+                admins: Option::None,
+            },
+            slack: SlackSet {
+                internal: Option::None,
+                support: Option::None,
+                notifications: Option::None,
+                alerts: Option::None,
+            },
+        });
+        owners
+    }
 
     #[test]
     fn version_tpl() {
@@ -326,6 +386,105 @@ mod tests {
     fn invalid_slack_channel() {
         let sc = SlackChannel::new("# iaminvalidåß∂ƒ••");
         let valid = sc.verify();
+        assert!(valid.is_err());
+    }
+
+    #[test]
+    fn verify_ped() {
+        let owners = default_owners();
+        let allowed_custom = default_allowed_custom();
+        let mut md = default_metadata();
+
+        md.ped = Option::None;
+        let valid = md.verify(&owners, &allowed_custom);
+        assert!(valid.is_ok());
+
+        md.ped = Option::Some("https://foo.com".to_string());
+        let valid = md.verify(&owners, &allowed_custom);
+        assert!(valid.is_ok());
+
+        md.ped = Option::Some("rubbish".to_string());
+        let valid = md.verify(&owners, &allowed_custom);
+        assert!(valid.is_err());
+    }
+
+    #[test]
+    fn verify_test_plan() {
+        let owners = default_owners();
+        let allowed_custom = default_allowed_custom();
+        let mut md = default_metadata();
+
+        md.testPlan = Option::None;
+        let valid = md.verify(&owners, &allowed_custom);
+        assert!(valid.is_ok());
+
+        md.testPlan = Option::Some("https://foo.com".to_string());
+        let valid = md.verify(&owners, &allowed_custom);
+        assert!(valid.is_ok());
+
+        md.testPlan = Option::Some("rubbish".to_string());
+        let valid = md.verify(&owners, &allowed_custom);
+        assert!(valid.is_err());
+    }
+
+    #[test]
+    fn verify_release_plan() {
+        let owners = default_owners();
+        let allowed_custom = default_allowed_custom();
+        let mut md = default_metadata();
+
+        md.releasePlan = Option::None;
+        let valid = md.verify(&owners, &allowed_custom);
+        assert!(valid.is_ok());
+
+        md.releasePlan = Option::Some("https://foo.com".to_string());
+        let valid = md.verify(&owners, &allowed_custom);
+        assert!(valid.is_ok());
+
+        md.releasePlan = Option::Some("rubbish".to_string());
+        let valid = md.verify(&owners, &allowed_custom);
+        assert!(valid.is_err());
+    }
+
+    #[test]
+    fn verify_threat_model() {
+        let owners = default_owners();
+        let allowed_custom = default_allowed_custom();
+
+        let mut md = default_metadata();
+        md.threatModel = vec![];
+        let valid = md.verify(&owners, &allowed_custom);
+        assert!(valid.is_ok());
+
+        let mut md = default_metadata();
+        md.threatModel = vec!["TMD.WOOP.12345".to_string(), "TMD.FOO.123".to_string()];
+        let valid = md.verify(&owners, &allowed_custom);
+        assert!(valid.is_ok());
+
+        let mut md = default_metadata();
+        md.threatModel = vec!["D.WOOP.12345".to_string(), "TMD.FOO.123".to_string()];
+        let valid = md.verify(&owners, &allowed_custom);
+        assert!(valid.is_err());
+    }
+
+    #[test]
+    fn verify_dpsia() {
+        let owners = default_owners();
+        let allowed_custom = default_allowed_custom();
+
+        let mut md = default_metadata();
+        md.dpsia = vec![];
+        let valid = md.verify(&owners, &allowed_custom);
+        assert!(valid.is_ok());
+
+        let mut md = default_metadata();
+        md.dpsia = vec!["http://foo.com".to_string(), "https://bar.com".to_string()];
+        let valid = md.verify(&owners, &allowed_custom);
+        assert!(valid.is_ok());
+
+        let mut md = default_metadata();
+        md.dpsia = vec!["rubbish".to_string(), "https://bar.com".to_string()];
+        let valid = md.verify(&owners, &allowed_custom);
         assert!(valid.is_err());
     }
 }
