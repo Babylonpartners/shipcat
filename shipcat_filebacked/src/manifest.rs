@@ -35,8 +35,8 @@ pub enum OneOrMany<T> {
     Many(Vec<T>),
 }
 
-impl Default for OneOrMany<String> {
-    fn default() -> OneOrMany<String> {
+impl<T> Default for OneOrMany<T> {
+    fn default() -> OneOrMany<T> {
         OneOrMany::Many(vec![])
     }
 }
